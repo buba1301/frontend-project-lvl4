@@ -32,6 +32,16 @@ module.exports = {
         use: 'babel-loader',
       },
       {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
+      {
         test: /\.s[ac]ss$/i,
         use: [
           { loader: 'style-loader' },

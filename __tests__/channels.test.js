@@ -7,7 +7,6 @@ const buildUrl = (url) => path.join('/api/v1/', url);
 
 test('get /channels', async () => {
   const app = buildApp({ port: 5000 });
-  console.log(app)
   const response = await app.inject({
     url: buildUrl('channels'),
   });

@@ -1,4 +1,8 @@
-[![Github Actions Status](https://github.com/hexlet-components/projects-frontend-l4-server/workflows/Node%20CI/badge.svg)](https://github.com/hexlet-components/projects-frontend-l4-server/actions)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e249f809c371787a23f9/maintainability)](https://codeclimate.com/github/buba1301/frontend-project-lvl4/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/e249f809c371787a23f9/test_coverage)](https://codeclimate.com/github/buba1301/frontend-project-lvl4/test_coverage)
+
+![Node CI](https://github.com/buba1301/frontend-project-lvl4/workflows/Node%20CI/badge.svg)
 
 ### Requirements
 

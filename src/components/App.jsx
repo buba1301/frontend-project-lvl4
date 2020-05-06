@@ -1,8 +1,12 @@
-import React from 'react'
+import React from 'react';
+import Channels from './Channels';
+import Messages from './Messages';
 
-const App = () => {
-    return (
-        <main role="application" className="row h-100 mx-auto overflow-hidden">
-        </main>
-      );
-};
+const App = () => (
+  <div className="row h-100 pb-3">
+    <Channels />
+    <Messages />
+  </div>
+);
+
+export default App;

@@ -1,12 +1,10 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/e249f809c371787a23f9/maintainability)](https://codeclimate.com/github/buba1301/frontend-project-lvl4/maintainability)
 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/e249f809c371787a23f9/test_coverage)](https://codeclimate.com/github/buba1301/frontend-project-lvl4/test_coverage)
-
 ![Node CI](https://github.com/buba1301/frontend-project-lvl4/workflows/Node%20CI/badge.svg)
 
 ### Requirements
 
-* [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+* [Heroku CLI](https://still-waters-26133.herokuapp.com/)
 
 ### Install
 

@@ -2,30 +2,31 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import { createStore, applyMiddleware, compose } from 'redux';
-import reducers from './reducers/index';
-import { getDataChannels } from './actions';
+import socket from './socket.js';
+import { actions } from './slices';
+import store from './store';
 import App from './components/App.jsx';
-
+import getUserName from './user';
+import Context from './context';
 
 export default (gon) => {
-  const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
-  const devtoolMiddleware = ext && ext();
+  store.dispatch(actions.getDataChannels(gon));
+  store.dispatch(actions.getDataMessages(gon));
+  store.dispatch(actions.getDataActiveChannel(gon));
 
-  const store = createStore(
-    reducers,
-    compose(
-      applyMiddleware(thunk),
-      devtoolMiddleware,
-    ),
-  );
+  const userName = getUserName();
+  console.log('APP_userName', userName);
 
-  store.dispatch(getDataChannels(gon));
+  socket.on('newMessage', ({ data }) => {
+    const { attributes } = data;
+    store.dispatch(actions.addMessagesSuccess([attributes]));
+  });
 
   render(
     <Provider store={store}>
-      <App />
+      <Context.Provider value={userName}>
+        <App />
+      </Context.Provider>
     </Provider>,
     document.getElementById('chat'),
   );

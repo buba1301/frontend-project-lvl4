@@ -1,22 +1,28 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import cn from 'classnames';
-// import * as actions from '../actions/index';
+// import { actions } from '../slices/index.js';
 
+const renderChannel = (id, name, activeChannel) => {
+  console.log('li', name);
+  const buttonClasses = cn({
+    'nav-link': true,
+    'btn btn-block': true,
+    active: id === activeChannel,
+  });
 
-const mapStateToProps = (state) => {
-  const { channels, channelUIState: { activeChannel } } = state;
-  console.log('Channels ', activeChannel);
-  return {
-    channels: channels.allIds.map((id) => channels.byId[id]),
-    activeChannel,
-  };
+  return (
+    <li className="nav-item" key={id}>
+      <button type="button" className={buttonClasses}>{name}</button>
+    </li>
+  );
 };
 
-const Channels = (props) => {
-  const { channels, activeChannel } = props;
-  console.log('Channels ', channels, activeChannel);
+const Channels = () => {
+  const channels = useSelector((state) => state.channels);
+  const activeChannel = useSelector((state) => state.activeChannel);
 
+  // const dispatch = useDispatch();
 
   return (
 
@@ -26,23 +32,10 @@ const Channels = (props) => {
         <button type="button" className="btn btn-link p-0 ml-auto">+</button>
       </div>
       <ul className="nav flex-column nav-pills nav-fill">
-        {channels.map(({ id, name }) => {
-          console.log('li', id === activeChannel);
-          const buttonClasses = cn({
-            'nav-link': true,
-            'btn btn-block': true,
-            active: id === activeChannel,
-          });
-
-          return (
-            <li className="nav-item" key={id}>
-              <button type="button" className={buttonClasses}>{name}</button>
-            </li>
-          );
-        })}
+        {channels.map(({ id, name }) => renderChannel(id, name, activeChannel))}
       </ul>
     </div>
   );
 };
 
-export default connect(mapStateToProps)(Channels);
+export default Channels;

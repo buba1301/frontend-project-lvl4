@@ -1,45 +1,32 @@
 import React from 'react';
-import { connect } from 'react-redux';
-// import * as actions from '../actions/index';
+import { useSelector } from 'react-redux';
 
-const mapStateToProps = (state) => {
-  const { messages } = state;
-  return { messages: Object.values(messages.byId) };
-};
 
-const Messages = (props) => {
-  const { messages } = props;
+const renderMessage = (messages, activeChannel) => {
+  if (messages.length === 0) {
+    return null;
+  }
 
-  return (
+  const activeMessages = messages.filter(({ channelId }) => channelId === activeChannel);
 
-    <div className="col h-100">
-      <div className="d-flex flex-column h-100">
-        <div id="messages-box" className="chat-messages overflow-auto mb-3">
-          {messages.length > 0 && messages.map(({ user, text }) => {
-            console.log(user);
-            return (
-              <div>
-                <b>{user}</b>
-                {':'}
-                {text}
-              </div>
-            );
-          })}
-
-          <div className="mt-auto">
-            <form noValidate>
-              <div className="form-group">
-                <div className="input-group">
-                  <input name="body" className="form-control" valie="" />
-                  <div className="d-block invalid-feedback">&nbsp;</div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+  return activeMessages.map((message) => {
+    console.log('MESSEGES', message);
+    const { userName, text, id } = message;
+    console.log('MESSEGES', userName);
+    return (
+      <div key={id}>
+        <b>{userName}</b>
+        {':'}
+        {text}
       </div>
-    </div>
-  );
+    );
+  });
 };
 
-export default connect(mapStateToProps)(Messages);
+const Messages = () => {
+  const { messages, activeChannel } = useSelector((state) => state);
+
+  return renderMessage(messages, activeChannel);
+};
+
+export default Messages;

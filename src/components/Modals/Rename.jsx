@@ -2,11 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import {
-  Modal, FormGroup, FormControl, Button, Spinner,
-} from 'react-bootstrap';
+import { Modal, FormGroup, FormControl } from 'react-bootstrap';
 import { asyncActions, actions } from '../../slices/index.js';
-
+import SubmitButton from './Submit';
 
 const renderHeaderModal = (t) => (
   <Modal.Header closeButton>
@@ -33,41 +31,10 @@ const renderBodyModal = (channel, inputRef, t) => (
           {channel.status}
         </FormControl.Feedback>
       </FormGroup>
-      {renderButton(channel, t)}
+      <SubmitButton isSubmitting={channel.isSubmitting} buttonType="Rename" />
     </form>
   </Modal.Body>
 );
-
-const renderButton = ({ isSubmitting }, t) => {
-  if (isSubmitting === false) {
-    return (<Button variant="primary" type="submit">Add</Button>);
-  }
-  return (
-    <>
-      <Button variant="primary" disabled={isSubmitting}>
-        <Spinner
-          as="span"
-          animation="border"
-          size="sm"
-          role="status"
-          aria-hidden="true"
-        />
-        <span className="sr-only">{t('modal.spiner')}</span>
-      </Button>
-      {' '}
-      <Button variant="primary" disabled={isSubmitting}>
-        <Spinner
-          as="span"
-          animation="grow"
-          size="sm"
-          role="status"
-          aria-hidden="true"
-        />
-        {t('modal.spiner')}
-      </Button>
-    </>
-  );
-};
 
 const Rename = () => {
   const { t } = useTranslation();
@@ -86,15 +53,12 @@ const Rename = () => {
     const { resetForm, setStatus } = methods;
     const { renameChannel } = asyncActions;
 
-    const channelData = { name, id };
-
     try {
-      await dispatch(renameChannel(channelData));
+      await dispatch(renameChannel({ name, id }));
       resetForm();
       dispatch(hideModal({}));
     } catch (e) {
-      setStatus(t('errors.network')); // !
-      console.log(e);
+      setStatus(t('errors.network'));
     }
   };
 

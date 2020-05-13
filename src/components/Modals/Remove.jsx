@@ -2,42 +2,29 @@ import React from 'react';
 import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import {
-  Modal, Button, Spinner,
-} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { asyncActions, actions } from '../../slices/index.js';
+import SubmitButton from './Submit';
 
+const renderHeaderModal = (t) => (
+  <Modal.Header closeButton>
+    <Modal.Title>{t('modal.remove.header')}</Modal.Title>
+  </Modal.Header>
+);
 
-const renderButton = ({ isSubmitting }, t) => {
-  if (isSubmitting === false) {
-    return (<Button variant="danger" type="submit">Remove</Button>);
-  }
-  return (
-    <>
-      <Button variant="danger" disabled={isSubmitting}>
-        <Spinner
-          as="span"
-          animation="border"
-          size="sm"
-          role="status"
-          aria-hidden="true"
-        />
-        <span className="sr-only">{t('modal.spiner')}</span>
-      </Button>
-      {' '}
-      <Button variant="danger" disabled={isSubmitting}>
-        <Spinner
-          as="span"
-          animation="grow"
-          size="sm"
-          role="status"
-          aria-hidden="true"
-        />
-        {t('modal.spiner')}
-      </Button>
-    </>
-  );
-};
+const renderBodyModal = (channel, t) => (
+  <Modal.Body>
+    <h6 className="text-dark">
+      {t('modal.remove.text')}
+    </h6>
+    <h6 className="text-danger">
+      {channel.status}
+    </h6>
+    <form onSubmit={channel.handleSubmit}>
+      <SubmitButton isSubmitting={channel.isSubmitting} buttonType="Remove" />
+    </form>
+  </Modal.Body>
+);
 
 const Remove = () => {
   const { t } = useTranslation();
@@ -75,20 +62,8 @@ const Remove = () => {
 
   return (
     <Modal show onHide={handleModal} centered>
-      <Modal.Header closeButton>
-        <Modal.Title>{t('modal.remove.header')}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <h6 className="text-dark">
-          {t('modal.remove.text')}
-        </h6>
-        <h6 className="text-danger">
-          {channel.status}
-        </h6>
-        <form onSubmit={channel.handleSubmit}>
-          {renderButton(channel, t)}
-        </form>
-      </Modal.Body>
+      {renderHeaderModal(t)}
+      {renderBodyModal(channel, t)}
     </Modal>
   );
 };

@@ -2,46 +2,43 @@ import React, { useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import {
-  Modal, FormGroup, FormControl, Button, Spinner,
-} from 'react-bootstrap';
+import { Modal, FormGroup, FormControl } from 'react-bootstrap';
 import { asyncActions, actions } from '../../slices/index.js';
+import SubmitButton from './Submit';
 
+const renderHeaderModal = (t) => (
+  <Modal.Header closeButton>
+    <Modal.Title>{t('modal.add.header')}</Modal.Title>
+  </Modal.Header>
+);
 
-const renderButton = ({ isSubmitting }, t) => {
-  if (isSubmitting === false) {
-    return (<Button variant="primary" type="submit">Add</Button>);
-  }
-  return (
-    <>
-      <Button variant="primary" disabled={isSubmitting}>
-        <Spinner
-          as="span"
-          animation="border"
-          size="sm"
-          role="status"
-          aria-hidden="true"
+const renderBodyModal = (channel, inputRef, t) => (
+  <Modal.Body>
+    <form onSubmit={channel.handleSubmit}>
+      <FormGroup>
+        <FormControl
+          name="name"
+          type="text"
+          placeholder={t('placeholder.channel')}
+          required
+          ref={inputRef}
+          onChange={channel.handleChange}
+          value={channel.values.name}
+          isInvalid={!!channel.status}
+          disabled={channel.isSubmitting}
         />
-        <span className="sr-only">{t('modal.spiner')}</span>
-      </Button>
-      {' '}
-      <Button variant="primary" disabled={isSubmitting}>
-        <Spinner
-          as="span"
-          animation="grow"
-          size="sm"
-          role="status"
-          aria-hidden="true"
-        />
-        {t('modal.spiner')}
-      </Button>
-    </>
-  );
-};
+        <FormControl.Feedback type="invalid">
+          {channel.status}
+        </FormControl.Feedback>
+      </FormGroup>
+      <SubmitButton isSubmitting={channel.isSubmitting} buttonType="Add" />
+    </form>
+  </Modal.Body>
+);
 
 const Add = () => {
   const { t } = useTranslation();
-  console.log('ADD', t('errors.network'));
+
   const { hideModal } = actions;
 
   const inputRef = useRef();
@@ -80,30 +77,8 @@ const Add = () => {
 
   return (
     <Modal show onHide={handleModal} centered>
-      <Modal.Header closeButton>
-        <Modal.Title>{t('modal.add.header')}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <form onSubmit={channel.handleSubmit}>
-          <FormGroup>
-            <FormControl
-              name="name"
-              type="text"
-              placeholder={t('placeholder.channel')}
-              required
-              ref={inputRef}
-              onChange={channel.handleChange}
-              value={channel.values.name}
-              isInvalid={!!channel.status}
-              disabled={channel.isSubmitting}
-            />
-            <FormControl.Feedback type="invalid">
-              {channel.status}
-            </FormControl.Feedback>
-          </FormGroup>
-          {renderButton(channel, t)}
-        </form>
-      </Modal.Body>
+      {renderHeaderModal(t)}
+      {renderBodyModal(channel, inputRef, t)}
     </Modal>
   );
 };

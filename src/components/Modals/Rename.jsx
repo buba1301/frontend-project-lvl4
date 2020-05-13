@@ -11,21 +11,19 @@ const Rename = () => {
   const { t } = useTranslation();
 
   const { modalInfo: { id } } = useSelector((state) => state);
-  const { hideModal } = actions;
 
   const dispatch = useDispatch();
 
-  const handleSubmit = async ({ name }, { resetForm, setStatus }) => {
+  const handleSubmit = async ({ name }, { setStatus }) => {
     try {
       await dispatch(asyncActions.renameChannel({ name, id }));
-      resetForm();
-      dispatch(hideModal());
+      dispatch(actions.hideModal());
     } catch (e) {
       setStatus(t('errors.network'));
     }
   };
 
-  const handleModal = () => dispatch(hideModal());
+  const handleModal = () => dispatch(actions.hideModal());
 
   const channel = useFormik({
     initialValues: {

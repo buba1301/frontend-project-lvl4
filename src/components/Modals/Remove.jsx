@@ -14,21 +14,16 @@ const Remove = () => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = async ({ id }, { resetForm, setStatus }) => {
-    const { removeChannel } = asyncActions;
-
+  const handleSubmit = async ({ id }, { setStatus }) => {
     try {
-      await dispatch(removeChannel({ id }));
-      resetForm();
-      dispatch(actions.hideModal({}));
+      await dispatch(asyncActions.removeChannel({ id }));
+      dispatch(actions.hideModal());
     } catch (e) {
       setStatus(t('errors.network'));
     }
   };
 
-  const handleModal = () => {
-    dispatch(actions.hideModal());
-  };
+  const handleModal = () => dispatch(actions.hideModal());
 
   const channel = useFormik({
     initialValues: {

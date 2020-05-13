@@ -15,10 +15,8 @@ const Add = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = async ({ name }, { resetForm, setStatus }) => {
-    const { addChannel } = asyncActions;
-
     try {
-      await dispatch(addChannel({ name }));
+      await dispatch(asyncActions.addChannel({ name }));
       resetForm();
       dispatch(hideModal({}));
     } catch (e) {
@@ -26,9 +24,7 @@ const Add = () => {
     }
   };
 
-  const handleModal = () => {
-    dispatch(hideModal({}));
-  };
+  const handleModal = () => dispatch(hideModal());
 
   const channel = useFormik({
     initialValues: {

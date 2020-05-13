@@ -55,7 +55,7 @@ const Rename = () => {
     try {
       await dispatch(renameChannel({ name, id }));
       resetForm();
-      dispatch(hideModal({}));
+      dispatch(hideModal());
     } catch (e) {
       setStatus(t('errors.network'));
     }

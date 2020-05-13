@@ -6,6 +6,24 @@ import { Form, FormGroup, FormControl } from 'react-bootstrap';
 import { asyncActions } from '../slices/index.js';
 import Context from '../utils/context';
 
+const renderFormGroup = (f, inputRef, t) => (
+  <FormGroup>
+    <FormControl
+      name="text"
+      type="text"
+      placeholder={t('placeholder.message')}
+      onChange={f.handleChange}
+      value={f.values.text}
+      isInvalid={!!f.status}
+      disabled={f.isSubmitting}
+      ref={inputRef}
+    />
+    <FormControl.Feedback type="invalid">
+      {f.status}
+    </FormControl.Feedback>
+  </FormGroup>
+);
+
 const MessageInput = () => {
   const { t } = useTranslation();
 
@@ -42,21 +60,7 @@ const MessageInput = () => {
 
   return (
     <Form onSubmit={f.handleSubmit} className="mx-6">
-      <FormGroup>
-        <FormControl
-          name="text"
-          type="text"
-          placeholder={t('placeholder.message')}
-          onChange={f.handleChange}
-          value={f.values.text}
-          isInvalid={!!f.status}
-          disabled={f.isSubmitting}
-          ref={inputRef}
-        />
-        <FormControl.Feedback type="invalid">
-          {f.status}
-        </FormControl.Feedback>
-      </FormGroup>
+      {renderFormGroup(f, inputRef, t)}
     </Form>
   );
 };

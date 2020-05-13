@@ -30,7 +30,6 @@ const Remove = () => {
   const { t } = useTranslation();
 
   const { modalInfo } = useSelector((state) => state);
-  const { hideModal } = actions;
 
   const dispatch = useDispatch();
 
@@ -40,14 +39,14 @@ const Remove = () => {
     try {
       await dispatch(removeChannel({ id }));
       resetForm();
-      dispatch(hideModal({}));
+      dispatch(actions.hideModal({}));
     } catch (e) {
       setStatus(t('errors.network'));
     }
   };
 
   const handleModal = () => {
-    dispatch(hideModal({}));
+    dispatch(actions.hideModal());
   };
 
   const channel = useFormik({

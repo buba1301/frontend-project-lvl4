@@ -50,10 +50,8 @@ const Rename = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = async ({ name }, { resetForm, setStatus }) => {
-    const { renameChannel } = asyncActions;
-
     try {
-      await dispatch(renameChannel({ name, id }));
+      await dispatch(asyncActions.renameChannel({ name, id }));
       resetForm();
       dispatch(hideModal());
     } catch (e) {
@@ -61,9 +59,7 @@ const Rename = () => {
     }
   };
 
-  const handleModal = () => {
-    dispatch(hideModal({}));
-  };
+  const handleModal = () => dispatch(hideModal());
 
   const channel = useFormik({
     initialValues: {

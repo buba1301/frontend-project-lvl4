@@ -38,8 +38,7 @@ const MessageInput = () => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = async ({ text }, methods) => {
-    const { resetForm, setStatus } = methods;
+  const handleSubmit = async ({ text }, { resetForm, setStatus }) => {
     const { addMessage } = asyncActions;
 
     const messageData = { activeChannel, userName, text };

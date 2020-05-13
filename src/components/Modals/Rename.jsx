@@ -1,51 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { Modal, FormGroup, FormControl } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { asyncActions, actions } from '../../slices/index.js';
-import SubmitButton from './Submit';
-
-const renderHeaderRenameModal = (t) => (
-  <Modal.Header closeButton>
-    <Modal.Title>{t('modal.rename.header')}</Modal.Title>
-  </Modal.Header>
-);
-
-const renderBodyRenameModal = (channel, inputRef, t) => (
-  <Modal.Body>
-    <form onSubmit={channel.handleSubmit}>
-      <FormGroup>
-        <FormControl
-          name="name"
-          type="text"
-          placeholder={t('placeholder.channel')}
-          required
-          ref={inputRef}
-          onChange={channel.handleChange}
-          value={channel.values.name}
-          isInvalid={!!channel.status}
-          disabled={channel.isSubmitting}
-        />
-        <FormControl.Feedback type="invalid">
-          {channel.status}
-        </FormControl.Feedback>
-      </FormGroup>
-      <SubmitButton isSubmitting={channel.isSubmitting} buttonType="Rename" />
-    </form>
-  </Modal.Body>
-);
+import ModalHeader from './Modal.Header';
+import { ModalBody } from './Modal.Body';
 
 const Rename = () => {
   const { t } = useTranslation();
 
   const { modalInfo: { id } } = useSelector((state) => state);
   const { hideModal } = actions;
-
-  const inputRef = useRef();
-  useEffect(() => {
-    inputRef.current.focus();
-  });
 
   const dispatch = useDispatch();
 
@@ -70,8 +36,8 @@ const Rename = () => {
 
   return (
     <Modal show onHide={handleModal} centered>
-      {renderHeaderRenameModal(t)}
-      {renderBodyRenameModal(channel, inputRef, t)}
+      <ModalHeader typeHeader="rename" />
+      <ModalBody channel={channel} buttonType="rename" />
     </Modal>
   );
 };

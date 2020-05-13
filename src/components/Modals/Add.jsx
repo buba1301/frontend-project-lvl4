@@ -6,13 +6,13 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
 import { asyncActions, actions } from '../../slices/index.js';
 import SubmitButton from './Submit';
 
-const renderHeaderModal = (t) => (
+const renderHeaderAddModal = (t) => (
   <Modal.Header closeButton>
     <Modal.Title>{t('modal.add.header')}</Modal.Title>
   </Modal.Header>
 );
 
-const renderBodyModal = (channel, inputRef, t) => (
+const renderBodyAddModal = (channel, inputRef, t) => (
   <Modal.Body>
     <form onSubmit={channel.handleSubmit}>
       <FormGroup>
@@ -48,14 +48,11 @@ const Add = () => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = async ({ name }, methods) => {
-    const { resetForm, setStatus } = methods;
+  const handleSubmit = async ({ name }, { resetForm, setStatus }) => {
     const { addChannel } = asyncActions;
 
-    const channelData = { name };
-
     try {
-      await dispatch(addChannel(channelData));
+      await dispatch(addChannel({ name }));
       resetForm();
       dispatch(hideModal({}));
     } catch (e) {
@@ -74,11 +71,10 @@ const Add = () => {
     onSubmit: handleSubmit,
   });
 
-
   return (
     <Modal show onHide={handleModal} centered>
-      {renderHeaderModal(t)}
-      {renderBodyModal(channel, inputRef, t)}
+      {renderHeaderAddModal(t)}
+      {renderBodyAddModal(channel, inputRef, t)}
     </Modal>
   );
 };

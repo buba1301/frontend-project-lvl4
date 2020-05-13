@@ -6,13 +6,13 @@ import { Modal, FormGroup, FormControl } from 'react-bootstrap';
 import { asyncActions, actions } from '../../slices/index.js';
 import SubmitButton from './Submit';
 
-const renderHeaderModal = (t) => (
+const renderHeaderRenameModal = (t) => (
   <Modal.Header closeButton>
     <Modal.Title>{t('modal.rename.header')}</Modal.Title>
   </Modal.Header>
 );
 
-const renderBodyModal = (channel, inputRef, t) => (
+const renderBodyRenameModal = (channel, inputRef, t) => (
   <Modal.Body>
     <form onSubmit={channel.handleSubmit}>
       <FormGroup>
@@ -49,8 +49,7 @@ const Rename = () => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = async ({ name }, methods) => {
-    const { resetForm, setStatus } = methods;
+  const handleSubmit = async ({ name }, { resetForm, setStatus }) => {
     const { renameChannel } = asyncActions;
 
     try {
@@ -75,8 +74,8 @@ const Rename = () => {
 
   return (
     <Modal show onHide={handleModal} centered>
-      {renderHeaderModal(t)}
-      {renderBodyModal(channel, inputRef, t)}
+      {renderHeaderRenameModal(t)}
+      {renderBodyRenameModal(channel, inputRef, t)}
     </Modal>
   );
 };

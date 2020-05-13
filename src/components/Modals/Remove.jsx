@@ -6,13 +6,13 @@ import { Modal } from 'react-bootstrap';
 import { asyncActions, actions } from '../../slices/index.js';
 import SubmitButton from './Submit';
 
-const renderHeaderModal = (t) => (
+const renderHeaderRemoveModal = (t) => (
   <Modal.Header closeButton>
     <Modal.Title>{t('modal.remove.header')}</Modal.Title>
   </Modal.Header>
 );
 
-const renderBodyModal = (channel, t) => (
+const renderBodyRemoveModal = (channel, t) => (
   <Modal.Body>
     <h6 className="text-dark">
       {t('modal.remove.text')}
@@ -34,14 +34,11 @@ const Remove = () => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = async ({ id }, methods) => {
-    const { resetForm, setStatus } = methods;
+  const handleSubmit = async ({ id }, { resetForm, setStatus }) => {
     const { removeChannel } = asyncActions;
 
-    const channelData = { id };
-
     try {
-      await dispatch(removeChannel(channelData));
+      await dispatch(removeChannel({ id }));
       resetForm();
       dispatch(hideModal({}));
     } catch (e) {
@@ -62,8 +59,8 @@ const Remove = () => {
 
   return (
     <Modal show onHide={handleModal} centered>
-      {renderHeaderModal(t)}
-      {renderBodyModal(channel, t)}
+      {renderHeaderRemoveModal(t)}
+      {renderBodyRemoveModal(channel, t)}
     </Modal>
   );
 };

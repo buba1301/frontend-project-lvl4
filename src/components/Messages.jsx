@@ -10,9 +10,8 @@ const renderMessage = (messages, activeChannel) => {
   const activeMessages = messages.filter(({ channelId }) => channelId === activeChannel);
 
   return activeMessages.map((message) => {
-    console.log('MESSEGES', message);
     const { userName, text, id } = message;
-    console.log('MESSEGES', userName);
+
     return (
       <div key={id}>
         <b>{userName}</b>

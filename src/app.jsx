@@ -2,12 +2,12 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import socket from './socket.js';
+import socket from './utils/socket.js';
 import { actions } from './slices';
 import store from './lib/store';
 import App from './components/App.jsx';
 import getUserName from './utils/user';
-import Context from './context';
+import Context from './utils/context';
 
 export default (gon) => {
   const defaultId = gon.currentChannelId;

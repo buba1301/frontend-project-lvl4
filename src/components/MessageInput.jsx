@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { Form, FormGroup, FormControl } from 'react-bootstrap';
 import { asyncActions } from '../slices/index.js';
-import Context from '../context';
+import Context from '../utils/context';
 
 const MessageInput = () => {
   const { t } = useTranslation();

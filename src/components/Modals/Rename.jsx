@@ -7,6 +7,37 @@ import {
 } from 'react-bootstrap';
 import { asyncActions, actions } from '../../slices/index.js';
 
+
+const renderHeaderModal = (t) => (
+  <Modal.Header closeButton>
+    <Modal.Title>{t('modal.rename.header')}</Modal.Title>
+  </Modal.Header>
+);
+
+const renderBodyModal = (channel, inputRef, t) => (
+  <Modal.Body>
+    <form onSubmit={channel.handleSubmit}>
+      <FormGroup>
+        <FormControl
+          name="name"
+          type="text"
+          placeholder={t('placeholder.channel')}
+          required
+          ref={inputRef}
+          onChange={channel.handleChange}
+          value={channel.values.name}
+          isInvalid={!!channel.status}
+          disabled={channel.isSubmitting}
+        />
+        <FormControl.Feedback type="invalid">
+          {channel.status}
+        </FormControl.Feedback>
+      </FormGroup>
+      {renderButton(channel, t)}
+    </form>
+  </Modal.Body>
+);
+
 const renderButton = ({ isSubmitting }, t) => {
   if (isSubmitting === false) {
     return (<Button variant="primary" type="submit">Add</Button>);
@@ -80,30 +111,8 @@ const Rename = () => {
 
   return (
     <Modal show onHide={handleModal} centered>
-      <Modal.Header closeButton>
-        <Modal.Title>{t('modal.rename.header')}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <form onSubmit={channel.handleSubmit}>
-          <FormGroup>
-            <FormControl
-              name="name"
-              type="text"
-              placeholder={t('placeholder.channel')}
-              required
-              ref={inputRef}
-              onChange={channel.handleChange}
-              value={channel.values.name}
-              isInvalid={!!channel.status}
-              disabled={channel.isSubmitting}
-            />
-            <FormControl.Feedback type="invalid">
-              {channel.status}
-            </FormControl.Feedback>
-          </FormGroup>
-          {renderButton(channel, t)}
-        </form>
-      </Modal.Body>
+      {renderHeaderModal(t)}
+      {renderBodyModal(channel, inputRef, t)}
     </Modal>
   );
 };

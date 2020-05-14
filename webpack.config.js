@@ -21,9 +21,6 @@ module.exports = {
     publicPath: '/assets/',
     filename: '[name].js',
   },
-  plugins: [
-    // new MiniCssExtractPlugin(),
-  ],
   module: {
     rules: [
       {

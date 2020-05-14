@@ -10,7 +10,6 @@ const renderModal = ({ type }) => {
     return null;
   }
   const Component = getModal(type);
-  console.log('APP', Component);
   return <Component />;
 };
 

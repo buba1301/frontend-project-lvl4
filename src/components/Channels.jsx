@@ -5,7 +5,6 @@ import cn from 'classnames';
 import { actions } from '../slices';
 
 const renderChannel = (id, name, activeChannel, handleSetActiveChannel) => {
-  console.log('li', name);
   const buttonClasses = cn({
     'nav-link': true,
     'btn btn-block': true,

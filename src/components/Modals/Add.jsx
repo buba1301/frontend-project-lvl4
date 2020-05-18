@@ -17,11 +17,11 @@ const Add = () => {
   const handleSubmit = async ({ name }, { resetForm, setStatus }) => {
     try {
       await dispatch(asyncActions.addChannel({ name }));
-      resetForm();
-      dispatch(hideModal({}));
+      dispatch(hideModal());
     } catch (e) {
       setStatus(t('errors.network'));
     }
+    resetForm();
   };
 
   const handleModal = () => dispatch(hideModal());

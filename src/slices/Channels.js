@@ -1,6 +1,8 @@
+/* eslint-disable max-len */
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import routes from '../routes';
+import { modalActions } from './Modal';
 
 const slice = createSlice({
   name: 'channels',
@@ -9,32 +11,46 @@ const slice = createSlice({
     getDataChannels: (state, { payload: { channels } }) => [...state, ...channels],
     addChannelSuccess: (state, { payload }) => [...state, ...payload],
     renameChannelSuccess: (state, { payload: { id, attributes } }) => {
-      console.log('CHANNELS SLICE', id, attributes);
       const filterChannel = state.filter((channel) => channel.id !== id);
       return [...filterChannel, attributes];
     },
-    removeChannelSuccess: (state, { payload: { id } }) => {
-      console.log('CHANNELS SLICE', id);
-      return state.filter((channel) => channel.id !== id);
-    },
+    removeChannelSuccess: (state, { payload: { id } }) => state.filter((channel) => channel.id !== id),
   },
 });
 
-const addChannel = ({ name }) => async () => {
-  const data = { attributes: { name } };
-  const url = routes.channelsPath();
-  await axios.post(url, { data });
+const addChannel = ({ name }) => async (dispatch) => {
+  dispatch(modalActions.modalRequest());
+  try {
+    const data = { attributes: { name } };
+    const url = routes.channelsPath();
+    await axios.post(url, { data });
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 };
 
-const renameChannel = ({ name, id }) => async () => {
-  const data = { attributes: { name } };
-  const url = routes.channelPath(id);
-  await axios.patch(url, { data });
+const renameChannel = ({ name, id }) => async (dispatch) => {
+  dispatch(modalActions.modalRequest());
+  try {
+    const data = { attributes: { name } };
+    const url = routes.channelPath(id);
+    await axios.patch(url, { data });
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 };
 
-const removeChannel = ({ id }) => async () => {
-  const url = routes.channelPath(id);
-  await axios.delete(url);
+const removeChannel = ({ id }) => async (dispatch) => {
+  dispatch(modalActions.modalRequest());
+  try {
+    const url = routes.channelPath(id);
+    await axios.delete(url);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 };
 
 const channels = slice.reducer;

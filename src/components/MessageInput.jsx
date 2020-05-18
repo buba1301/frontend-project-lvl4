@@ -44,10 +44,10 @@ const MessageInput = () => {
     const messageData = { activeChannel, userName, text };
     try {
       await dispatch(addMessage(messageData));
-      resetForm();
     } catch (e) {
       setStatus(t('errors.network'));
     }
+    resetForm();
   };
 
   const f = useFormik({

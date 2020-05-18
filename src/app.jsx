@@ -17,7 +17,6 @@ export default (gon) => {
   store.dispatch(actions.setActiveChannel(gon.currentChannelId));
 
   const userName = getUserName();
-  console.log('APP_userName', userName);
 
   socket.on('newMessage', ({ data }) => {
     const { attributes } = data;
@@ -32,7 +31,6 @@ export default (gon) => {
     store.dispatch(actions.renameChannelSuccess(data));
   });
   socket.on('removeChannel', ({ data }) => {
-    console.log('app.jsx', data);
     store.dispatch(actions.setActiveChannel(defaultId));
     store.dispatch(actions.removeChannelSuccess(data));
   });

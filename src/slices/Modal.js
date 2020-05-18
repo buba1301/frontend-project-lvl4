@@ -2,10 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const slice = createSlice({
   name: 'modalInfo',
-  initialState: { type: null, item: null },
+  initialState: { type: null, id: null, submitState: 'none' },
   reducers: {
-    hideModal: () => ({ type: null, id: null }),
-    showModal: (state, { payload: { type, id } }) => ({ type, id }),
+    hideModal: () => ({ type: null, id: null, submitState: 'none' }),
+    showModal: (state, { payload: { type, id } }) => ({ type, id, submitState: 'none' }),
+    modalRequest: (state) => ({ ...state, submitState: 'request' }),
   },
 });
 

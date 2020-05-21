@@ -14,7 +14,7 @@ const renderModal = ({ type }) => {
 };
 
 const App = () => {
-  const { modalInfo } = useSelector((state) => state);
+  const modalInfo = useSelector((state) => state.modalInfo);
 
   const { showModal } = actions;
 

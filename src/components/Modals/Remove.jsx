@@ -4,13 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Modal } from 'react-bootstrap';
 import { asyncActions, actions } from '../../slices/index.js';
-import ModalHeader from './Modal.Header';
-import { ModalBodyRemove } from './Modal.Body';
+import ModalHeader from './Elements/ModalHeader';
+import { ModalBodyRemove } from './Elements/ModalBody';
 
 const Remove = () => {
   const { t } = useTranslation();
 
-  const { modalInfo } = useSelector((state) => state);
+  const modalInfo = useSelector((state) => state.modalInfo);
 
   const dispatch = useDispatch();
 

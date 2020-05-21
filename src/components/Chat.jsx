@@ -4,14 +4,14 @@ import { useSelector } from 'react-redux';
 import Messages from './Messages.jsx';
 import MessageInput from './MessageInput';
 
-const renderChatHeader = (removable, id, handleModal) => {
+const renderChatHeader = (removable, id, onClick) => {
   if (!removable) {
     return null;
   }
   return (
     <ButtonGroup>
-      <Button variant="outline-dark" onClick={handleModal('renaming', id)}>Rename</Button>
-      <Button variant="outline-dark" onClick={handleModal('removing', id)}>Remove</Button>
+      <Button variant="outline-dark" onClick={onClick('renaming', id)}>Rename</Button>
+      <Button variant="outline-dark" onClick={onClick('removing', id)}>Remove</Button>
     </ButtonGroup>
   );
 };

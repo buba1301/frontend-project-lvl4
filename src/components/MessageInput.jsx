@@ -4,30 +4,12 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { Form, FormGroup, FormControl } from 'react-bootstrap';
 import { asyncActions } from '../slices/index.js';
-import Context from '../utils/context';
-
-const renderFormGroup = (f, inputRef, t) => (
-  <FormGroup>
-    <FormControl
-      name="text"
-      type="text"
-      placeholder={t('placeholder.message')}
-      onChange={f.handleChange}
-      value={f.values.text}
-      isInvalid={!!f.status}
-      disabled={f.isSubmitting}
-      ref={inputRef}
-    />
-    <FormControl.Feedback type="invalid">
-      {f.status}
-    </FormControl.Feedback>
-  </FormGroup>
-);
+import Context from '../context';
 
 const MessageInput = () => {
   const { t } = useTranslation();
 
-  const { activeChannel } = useSelector((state) => state);
+  const activeChannel = useSelector((state) => state.activeChannel);
 
   const userName = useContext(Context);
 
@@ -59,7 +41,21 @@ const MessageInput = () => {
 
   return (
     <Form onSubmit={f.handleSubmit} className="mx-6">
-      {renderFormGroup(f, inputRef, t)}
+      <FormGroup>
+        <FormControl
+          name="text"
+          type="text"
+          placeholder={t('placeholder.message')}
+          onChange={f.handleChange}
+          value={f.values.text}
+          isInvalid={!!f.status}
+          disabled={f.isSubmitting}
+          ref={inputRef}
+        />
+        <FormControl.Feedback type="invalid">
+          {f.status}
+        </FormControl.Feedback>
+      </FormGroup>
     </Form>
   );
 };

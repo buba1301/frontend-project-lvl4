@@ -2,12 +2,16 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import socket from './utils/socket.js';
+import io from 'socket.io-client';
 import { actions } from './slices';
 import store from './lib/store';
 import App from './components/App.jsx';
 import getUserName from './utils/user';
-import Context from './utils/context';
+import Context from './context';
+
+const socket = io({
+  transports: ['websocket'],
+});
 
 export default (gon) => {
   const defaultId = gon.currentChannelId;

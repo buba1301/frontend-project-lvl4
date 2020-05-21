@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal, FormGroup, FormControl } from 'react-bootstrap';
-import SubmitButton from './Submit';
+import SubmitButton from './SubmitButton';
 
 export const ModalBodyRemove = ({ channel, buttonType }) => {
   const { t } = useTranslation();

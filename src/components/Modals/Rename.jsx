@@ -4,19 +4,24 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Modal } from 'react-bootstrap';
 import { asyncActions, actions } from '../../slices/index.js';
-import ModalHeader from './Modal.Header';
-import { ModalBody } from './Modal.Body';
+import ModalHeader from './Elements/ModalHeader';
+import { ModalBody } from './Elements/ModalBody';
 
 const Rename = () => {
   const { t } = useTranslation();
 
-  const { modalInfo: { id } } = useSelector((state) => state);
+  const { modalInfo, channels } = useSelector((state) => state);
+
+  const currentId = modalInfo.id;
+
+  const currentChannel = channels.find((channel) => channel.id === currentId);
+  const currentName = currentChannel.name;
 
   const dispatch = useDispatch();
 
   const handleSubmit = async ({ name }, { setStatus }) => {
     try {
-      await dispatch(asyncActions.renameChannel({ name, id }));
+      await dispatch(asyncActions.renameChannel({ name, currentId }));
       dispatch(actions.hideModal());
     } catch (e) {
       setStatus(t('errors.network'));
@@ -27,7 +32,7 @@ const Rename = () => {
 
   const channel = useFormik({
     initialValues: {
-      name: '',
+      name: currentName,
     },
     onSubmit: handleSubmit,
   });

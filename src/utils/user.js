@@ -1,12 +1,17 @@
 import faker from 'faker';
 import Cookies from 'js-cookie';
 
+const useCookies = {
+  get: () => Cookies.get('userName'),
+  set: (newUserName) => Cookies.set('userName', newUserName),
+};
+
 export default () => {
-  const userName = Cookies.get('userName');
+  const userName = useCookies.get();
   if (userName) {
     return userName;
   }
   const newUserName = faker.internet.userName();
-  Cookies.set('userName', newUserName);
+  useCookies.set(newUserName);
   return newUserName;
 };

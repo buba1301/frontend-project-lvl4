@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Modal } from 'react-bootstrap';
 import { asyncActions, actions } from '../../slices/index.js';
-import ModalHeader from './Modal.Header';
-import { ModalBody } from './Modal.Body';
+import ModalHeader from './Elements/ModalHeader';
+import { ModalBody } from './Elements/ModalBody';
 
 const Add = () => {
   const { t } = useTranslation();

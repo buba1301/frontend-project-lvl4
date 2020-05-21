@@ -30,11 +30,11 @@ const addChannel = ({ name }) => async (dispatch) => {
   }
 };
 
-const renameChannel = ({ name, id }) => async (dispatch) => {
+const renameChannel = ({ name, currentId }) => async (dispatch) => {
   dispatch(modalActions.modalRequest());
   try {
     const data = { attributes: { name } };
-    const url = routes.channelPath(id);
+    const url = routes.channelPath(currentId);
     await axios.patch(url, { data });
   } catch (e) {
     console.log(e);

@@ -4,16 +4,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
 import { actions } from '../slices';
 
-const renderChannel = (id, name, activeChannel, handleSetActiveChannel) => {
-  const buttonClasses = cn({
-    'nav-link': true,
-    'btn btn-block': true,
-    active: id === activeChannel,
-  });
+const renderChannel = (id, name, activeChannel, onClick) => {
+  const buttonClasses = cn(
+    'nav-link btn btn-block', {
+      active: id === activeChannel,
+    },
+  );
 
   return (
     <li className="nav-item" key={id}>
-      <button type="button" className={buttonClasses} onClick={handleSetActiveChannel(id)}>{name}</button>
+      <button type="button" className={buttonClasses} onClick={onClick(id)}>{name}</button>
     </li>
   );
 };

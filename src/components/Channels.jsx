@@ -19,7 +19,9 @@ const renderChannel = (id, name, activeChannel, onClick) => {
 };
 
 const Channels = ({ handleModal }) => {
-  const { channels, activeChannel } = useSelector((state) => state);
+  const channels = useSelector((state) => state.channels);
+  const activeChannel = useSelector((state) => state.activeChannel);
+
   const { setActiveChannel } = actions;
 
   const dispatch = useDispatch();

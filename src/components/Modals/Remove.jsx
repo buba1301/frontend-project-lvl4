@@ -4,8 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Modal } from 'react-bootstrap';
 import { asyncActions, actions } from '../../slices/index.js';
-import ModalHeader from './Elements/ModalHeader';
-import { ModalBodyRemove } from './Elements/ModalBody';
+import SubmitButton from './SubmitButton.jsx';
 
 const Remove = () => {
   const { t } = useTranslation();
@@ -34,8 +33,20 @@ const Remove = () => {
 
   return (
     <Modal show onHide={handleModal} centered>
-      <ModalHeader typeHeader="remove" />
-      <ModalBodyRemove channel={channel} buttonType="remove" />
+      <Modal.Header closeButton>
+        <Modal.Title>{t('modal.remove.header')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <form onSubmit={channel.handleSubmit}>
+          <h6 className="text-dark">
+            {t('modal.remove.text')}
+          </h6>
+          <h6 className="text-danger">
+            {channel.status}
+          </h6>
+          <SubmitButton isSubmitting={channel.isSubmitting} buttonType="Remove" />
+        </form>
+      </Modal.Body>
     </Modal>
   );
 };

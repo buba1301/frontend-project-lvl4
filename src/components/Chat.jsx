@@ -17,7 +17,8 @@ const renderChatHeader = (removable, id, onClick) => {
 };
 
 const Chat = ({ handleModal }) => {
-  const { channels, activeChannel } = useSelector((state) => state);
+  const channels = useSelector((state) => state.channels);
+  const activeChannel = useSelector((state) => state.activeChannel);
 
   const currentChannel = channels.find(({ id }) => id === activeChannel);
 

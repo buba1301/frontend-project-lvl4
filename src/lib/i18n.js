@@ -25,11 +25,6 @@ const resources = {
         channel: 'Write the name of the channel',
         message: 'Write your message and press enter',
       },
-      button: {
-        add: 'Add',
-        rename: 'Rename',
-        remove: 'Remove',
-      },
     },
   },
 };

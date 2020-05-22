@@ -23,7 +23,8 @@ const renderMessage = (messages, activeChannel) => {
 };
 
 const Messages = () => {
-  const { messages, activeChannel } = useSelector((state) => state);
+  const messages = useSelector((state) => state.messages);
+  const activeChannel = useSelector((state) => state.activeChannel);
 
   return renderMessage(messages, activeChannel);
 };

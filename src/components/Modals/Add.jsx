@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { Modal } from 'react-bootstrap';
+import { Modal, FormGroup, FormControl } from 'react-bootstrap';
 import { asyncActions, actions } from '../../slices/index.js';
-import ModalHeader from './Elements/ModalHeader';
-import { ModalBody } from './Elements/ModalBody';
+import SubmitButton from './SubmitButton.jsx';
 
 const Add = () => {
   const { t } = useTranslation();
@@ -13,6 +12,11 @@ const Add = () => {
   const { hideModal } = actions;
 
   const dispatch = useDispatch();
+
+  const inputRef = useRef();
+  useEffect(() => {
+    inputRef.current.focus();
+  });
 
   const handleSubmit = async ({ name }, { resetForm, setStatus }) => {
     try {
@@ -35,8 +39,30 @@ const Add = () => {
 
   return (
     <Modal show onHide={handleModal} centered>
-      <ModalHeader typeHeader="add" />
-      <ModalBody channel={channel} buttonType="add" />
+      <Modal.Header closeButton>
+        <Modal.Title>{t('modal.add.header')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <form onSubmit={channel.handleSubmit}>
+          <FormGroup>
+            <FormControl
+              name="name"
+              type="text"
+              placeholder={t('placeholder.channel')}
+              required
+              ref={inputRef}
+              onChange={channel.handleChange}
+              value={channel.values.name}
+              isInvalid={!!channel.status}
+              disabled={channel.isSubmitting}
+            />
+            <FormControl.Feedback type="invalid">
+              {channel.status}
+            </FormControl.Feedback>
+          </FormGroup>
+          <SubmitButton isSubmitting={channel.isSubmitting} buttonType="Add" />
+        </form>
+      </Modal.Body>
     </Modal>
   );
 };

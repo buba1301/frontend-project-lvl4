@@ -60,7 +60,7 @@ const Add = () => {
               {channel.status}
             </FormControl.Feedback>
           </FormGroup>
-          <SubmitButton isSubmitting={channel.isSubmitting} buttonType="Add" />
+          <SubmitButton isSubmitting={channel.isSubmitting} buttonType="Add" buttonStyle="primary"/>
         </form>
       </Modal.Body>
     </Modal>

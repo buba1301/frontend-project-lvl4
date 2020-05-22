@@ -3,20 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { Button, Spinner } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-const mapButtonStyle = {
-  Remove: 'danger',
-  Add: 'primary',
-  Rename: 'primary',
-};
-
-const getButtonStyle = (buttonType) => mapButtonStyle[buttonType];
-
-const SubmitButton = ({ isSubmitting, buttonType }) => {
+const SubmitButton = ({ isSubmitting, buttonType, buttonStyle }) => {
   const { t } = useTranslation();
 
   const { modalInfo } = useSelector((state) => state);
-
-  const buttonStyle = getButtonStyle(buttonType);
 
   if (modalInfo.submitState === 'request') {
     return (

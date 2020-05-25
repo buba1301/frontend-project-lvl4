@@ -65,7 +65,7 @@ const Rename = () => {
               {channel.status}
             </FormControl.Feedback>
           </FormGroup>
-          <SubmitButton isSubmitting={channel.isSubmitting} buttonType="Rename" buttonStyle="primary" />
+          <SubmitButton isSubmitting={channel.isSubmitting} label={modalInfo.type} />
         </form>
       </Modal.Body>
     </Modal>

@@ -3,15 +3,21 @@ import { useTranslation } from 'react-i18next';
 import { Button, Spinner } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-const SubmitButton = ({ isSubmitting, buttonType, buttonStyle }) => {
+const mappedButtonStyle = {
+  adding: 'primary',
+  removing: 'danger',
+  renaming: 'primary',
+};
+
+const SubmitButton = ({ isSubmitting, label }) => {
   const { t } = useTranslation();
 
-  const { modalInfo } = useSelector((state) => state);
+  const modalInfo = useSelector((state) => state.modalInfo);
 
   if (modalInfo.submitState === 'request') {
     return (
       <>
-        <Button variant={buttonStyle} disabled={isSubmitting}>
+        <Button variant={mappedButtonStyle[modalInfo.type]} disabled={isSubmitting}>
           <Spinner
             as="span"
             animation="grow"
@@ -25,8 +31,8 @@ const SubmitButton = ({ isSubmitting, buttonType, buttonStyle }) => {
     );
   }
   return (
-    <Button variant={buttonStyle} type="submit">
-      {buttonType}
+    <Button variant={mappedButtonStyle[modalInfo.type]} type="submit">
+      {t(`button.${label}`)}
     </Button>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Modal, FormGroup, FormControl } from 'react-bootstrap';
 import { asyncActions, actions } from '../../slices/index.js';
@@ -8,6 +8,8 @@ import SubmitButton from './SubmitButton.jsx';
 
 const Add = () => {
   const { t } = useTranslation();
+
+  const modalInfo = useSelector((state) => state.modalInfo);
 
   const { hideModal } = actions;
 
@@ -60,7 +62,7 @@ const Add = () => {
               {channel.status}
             </FormControl.Feedback>
           </FormGroup>
-          <SubmitButton isSubmitting={channel.isSubmitting} buttonType="Add" buttonStyle="primary" />
+          <SubmitButton isSubmitting={channel.isSubmitting} label={modalInfo.type} />
         </form>
       </Modal.Body>
     </Modal>

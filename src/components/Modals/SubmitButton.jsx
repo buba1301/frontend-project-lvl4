@@ -9,7 +9,7 @@ const mappedButtonStyle = {
   renaming: 'primary',
 };
 
-const SubmitButton = ({ isSubmitting, label }) => {
+const SubmitButton = ({ isSubmitting }) => {
   const { t } = useTranslation();
 
   const modalInfo = useSelector((state) => state.modalInfo);
@@ -32,7 +32,7 @@ const SubmitButton = ({ isSubmitting, label }) => {
   }
   return (
     <Button variant={mappedButtonStyle[modalInfo.type]} type="submit">
-      {t(`button.${label}`)}
+      {t(`button.${modalInfo.type}`)}
     </Button>
   );
 };

@@ -44,7 +44,7 @@ const Remove = () => {
           <h6 className="text-danger">
             {channel.status}
           </h6>
-          <SubmitButton isSubmitting={channel.isSubmitting} label={modalInfo.type} />
+          <SubmitButton isSubmitting={channel.isSubmitting} />
         </form>
       </Modal.Body>
     </Modal>

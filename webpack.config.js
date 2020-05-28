@@ -16,6 +16,7 @@ module.exports = {
     publicPath: '/assets/',
     filename: '[name].js',
   },
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {

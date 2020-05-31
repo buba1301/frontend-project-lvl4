@@ -18,7 +18,7 @@ const renderChannel = (id, name, activeChannel, onClick) => {
   );
 };
 
-const Channels = ({ handleModal }) => {
+const ChannelsBox = ({ handleModal }) => {
   const channels = useSelector((state) => state.channels);
   const activeChannel = useSelector((state) => state.activeChannel);
 
@@ -43,4 +43,4 @@ const Channels = ({ handleModal }) => {
   );
 };
 
-export default Channels;
+export default ChannelsBox;

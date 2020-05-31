@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Channels from './ChannelsBox';
+import ChannelsBox from './ChannelsBox';
 import Chat from './Chat';
 import getModal from './Modals/index';
 import { actions } from '../slices/index.js';
@@ -27,7 +27,7 @@ const App = () => {
   return (
     <>
       <div className="row h-100 pb-3">
-        <Channels handleModal={handleModal} />
+        <ChannelsBox handleModal={handleModal} />
         <Chat handleModal={handleModal} />
         {renderModal(modalInfo)}
       </div>

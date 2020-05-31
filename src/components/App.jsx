@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Channels from './Channels';
+import Channels from './ChannelsBox';
 import Chat from './Chat';
 import getModal from './Modals/index';
 import { actions } from '../slices/index.js';

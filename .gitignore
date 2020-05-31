@@ -1,4 +1,5 @@
 node_modules
 dist
+jsconfig.json
 .vscode
 .DS_Store

@@ -1,13 +1,19 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
 
+const selectActiveMassages = createSelector(
+  (state) => state.messages,
+  (state) => state.activeChannel,
+  (messages, activeChannel) => messages.filter(({ channelId }) => channelId === activeChannel),
+);
 
-const renderMessage = (messages, activeChannel) => {
-  if (messages.length === 0) {
+const Messages = () => {
+  const activeMessages = useSelector((state) => selectActiveMassages(state));
+
+  if (activeMessages.length === 0) {
     return null;
   }
-
-  const activeMessages = messages.filter(({ channelId }) => channelId === activeChannel);
 
   return activeMessages.map((message) => {
     const { userName, text, id } = message;
@@ -20,13 +26,6 @@ const renderMessage = (messages, activeChannel) => {
       </div>
     );
   });
-};
-
-const Messages = () => {
-  const messages = useSelector((state) => state.messages);
-  const activeChannel = useSelector((state) => state.activeChannel);
-
-  return renderMessage(messages, activeChannel);
 };
 
 export default Messages;

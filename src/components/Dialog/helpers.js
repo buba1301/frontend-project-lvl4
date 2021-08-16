@@ -1,10 +1,8 @@
 const normalizeDialog = (dialog) => {
   const mapMessage = dialog.map((message) => ({
-    [message.date]: {
-      ...message,
-      isReverse: message.userName === 'My',
-      isRemovable: message.userName === 'My',
-    },
+    ...message,
+    isReverse: message.userName === 'My',
+    isRemovable: message.userName === 'My',
   }));
 
   return mapMessage;

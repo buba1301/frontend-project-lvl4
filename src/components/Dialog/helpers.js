@@ -1,5 +1,19 @@
 const normalizeDialog = (dialog) => {
-  const newDialog = [];
+  const mapMessage = dialog.map((message) => ({
+    [message.date]: {
+      ...message,
+      isReverse: message.userName === 'My',
+      isRemovable: message.userName === 'My',
+    },
+  }));
+
+  return mapMessage;
+};
+
+export default normalizeDialog;
+
+/*
+const newDialog = [];
 
   dialog.forEach((item, i) => {
     if (i === 0 || item.is !== dialog[i - 1].is) {
@@ -34,6 +48,4 @@ const normalizeDialog = (dialog) => {
   });
 
   return newDialog;
-};
-
-export default normalizeDialog;
+*/

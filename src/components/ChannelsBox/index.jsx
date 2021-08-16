@@ -2,18 +2,18 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
-import { actions } from '../slices';
+import { actions } from '../../slices';
 
 const renderChannel = (id, name, activeChannel, onClick) => {
-  const buttonClasses = cn(
-    'nav-link btn btn-block', {
-      active: id === activeChannel,
-    },
-  );
+  const buttonClasses = cn('nav-link btn btn-block', {
+    active: id === activeChannel,
+  });
 
   return (
     <li className="nav-item" key={id}>
-      <button type="button" className={buttonClasses} onClick={onClick(id)}>{name}</button>
+      <button type="button" className={buttonClasses} onClick={onClick(id)}>
+        {name}
+      </button>
     </li>
   );
 };
@@ -34,7 +34,9 @@ const ChannelsBox = ({ handleModal }) => {
     <div className="col-3 border-right">
       <div className="d-flex mb-2">
         <span>Channels</span>
-        <button type="button" className="btn btn-link p-0 ml-auto" onClick={handleModal('adding')}>+</button>
+        <button type="button" className="btn btn-link p-0 ml-auto" onClick={handleModal('adding')}>
+          +
+        </button>
       </div>
       <ul className="nav flex-column nav-pills nav-fill">
         {channels.map(({ id, name }) => renderChannel(id, name, activeChannel, handleSetActiveChannel))}

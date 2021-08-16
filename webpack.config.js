@@ -2,9 +2,7 @@
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
-  entry: [
-    `${__dirname}/src/index.js`,
-  ],
+  entry: [`${__dirname}/src/index.js`],
   externals: {
     gon: 'gon',
   },
@@ -38,6 +36,10 @@ module.exports = {
             presets: ['@babel/preset-env'],
           },
         },
+      },
+      {
+        test: /\.css$/i,
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
       },
       {
         test: /\.s[ac]ss$/i,

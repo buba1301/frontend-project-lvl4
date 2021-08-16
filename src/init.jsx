@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import io from 'socket.io-client';
 import { actions } from './slices';
 import store from './lib/store';
-import App from './components/App.jsx';
+import App from './App';
 import getUserName from './utils/user';
 import Context from './context';
 

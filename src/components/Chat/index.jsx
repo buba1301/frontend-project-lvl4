@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import Messages from './Messages.jsx';
-import MessageInput from './MessageInput';
+import Messages from '../Messages';
+import MessageInput from '../MessegeInput';
 
 const renderChatHeader = (removable, id, onClick) => {
   if (!removable) {
@@ -10,8 +10,12 @@ const renderChatHeader = (removable, id, onClick) => {
   }
   return (
     <ButtonGroup>
-      <Button variant="outline-dark" onClick={onClick('renaming', id)}>Rename</Button>
-      <Button variant="outline-dark" onClick={onClick('removing', id)}>Remove</Button>
+      <Button variant="outline-dark" onClick={onClick('renaming', id)}>
+        Rename
+      </Button>
+      <Button variant="outline-dark" onClick={onClick('removing', id)}>
+        Remove
+      </Button>
     </ButtonGroup>
   );
 };

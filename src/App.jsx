@@ -1,9 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import ChannelsBox from './ChannelsBox';
-import Chat from './Chat';
-import getModal from './Modals/index';
-import { actions } from '../slices/index.js';
+
+import ChannelsBox from './components/ChannelsBox';
+import Chat from './components/Chat';
+import Header from './components/Header';
+import getModal from './components/Modals/index';
+import { actions } from './slices/index.js';
+
+import './index.css';
 
 const renderModal = ({ type }) => {
   if (!type) {
@@ -20,18 +24,19 @@ const App = () => {
 
   const dispatch = useDispatch();
 
-  const handleModal = (type, id = null) => () => {
+  const handleModal = (type, id = null) => {
     dispatch(showModal({ type, id }));
   };
 
   return (
-    <>
+    <div className="container">
+      <Header />
       <div className="row h-100 pb-3">
-        <ChannelsBox handleModal={handleModal} />
+        <ChannelsBox handleModal={() => handleModal} />
         <Chat handleModal={handleModal} />
         {renderModal(modalInfo)}
       </div>
-    </>
+    </div>
   );
 };
 

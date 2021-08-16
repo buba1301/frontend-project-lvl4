@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { Form, FormGroup, FormControl } from 'react-bootstrap';
-import { asyncActions } from '../slices/index.js';
-import Context from '../context';
+import { asyncActions } from '../../slices/index.js';
+import Context from '../../context';
 
 const MessageInput = () => {
   const { t } = useTranslation();
@@ -52,9 +52,7 @@ const MessageInput = () => {
           disabled={f.isSubmitting}
           ref={inputRef}
         />
-        <FormControl.Feedback type="invalid">
-          {f.status}
-        </FormControl.Feedback>
+        <FormControl.Feedback type="invalid">{f.status}</FormControl.Feedback>
       </FormGroup>
     </Form>
   );

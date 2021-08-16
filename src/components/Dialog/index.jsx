@@ -1,19 +1,29 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Message from '../Messege';
 
 import normalizeDialog from './helpers';
-import data from '../../data';
 
 import './styles.css';
 
 const Dialog = () => {
-  const normalizedDialog = normalizeDialog(data);
+  const messages = useSelector((state) => state.messages);
+
+  const normalizedDialog = normalizeDialog(messages);
 
   return (
     <div className="dialog">
       <div className="overflow">
         {normalizedDialog.map((item) => (
-          <Message {...item} key={item.id} />
+          <Message
+            key={item.id}
+            avatar={item.avatar}
+            message={item.message}
+            id={item.id}
+            date={item.date}
+            isReverse={item.isReverse}
+            isRemovable={item.isRemovable}
+          />
         ))}
       </div>
     </div>

@@ -18,13 +18,7 @@ const SubmitButton = ({ isSubmitting }) => {
     return (
       <>
         <Button variant={mappedButtonStyle[modalInfo.type]} disabled={isSubmitting}>
-          <Spinner
-            as="span"
-            animation="grow"
-            size="sm"
-            role="status"
-            aria-hidden="true"
-          />
+          <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
           {t('modal.spiner')}
         </Button>
       </>

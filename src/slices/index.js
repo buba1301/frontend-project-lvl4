@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux';
-import {
-  channels, channelsActions, addChannel, renameChannel, removeChannel,
-} from './Channels';
+import { channels, channelsActions, addChannel, renameChannel, removeChannel } from './Channels';
 import { messages, messagesActions, addMessage } from './Messages';
 import { activeChannel, activeChannelActions } from './ActiveChannel';
 import { modalInfo, modalActions } from './Modal';
@@ -20,10 +18,7 @@ const asyncActions = {
   removeChannel,
 };
 
-export {
-  actions,
-  asyncActions,
-};
+export { actions, asyncActions };
 
 export default combineReducers({
   channels,

@@ -2,9 +2,10 @@ import React, { useContext, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { Form, FormGroup, FormControl } from 'react-bootstrap';
 import { asyncActions } from '../../slices/index.js';
 import Context from '../../context';
+
+import './styles.css';
 
 const MessageInput = () => {
   const { t } = useTranslation();
@@ -40,22 +41,37 @@ const MessageInput = () => {
   });
 
   return (
-    <Form onSubmit={f.handleSubmit} className="mx-6">
-      <FormGroup>
-        <FormControl
-          name="text"
-          type="text"
-          placeholder={t('placeholder.message')}
-          onChange={f.handleChange}
-          value={f.values.text}
-          isInvalid={!!f.status}
-          disabled={f.isSubmitting}
-          ref={inputRef}
-        />
-        <FormControl.Feedback type="invalid">{f.status}</FormControl.Feedback>
-      </FormGroup>
-    </Form>
+    <form className="sender" onSubmit={f.handleSubmit}>
+      <input
+        name="text"
+        type="text"
+        placeholder={t('placeholder.message')}
+        onChange={f.handleChange}
+        value={f.values.text}
+        isInvalid={!!f.status}
+        disabled={f.isSubmitting}
+        ref={inputRef}
+      />
+
+      <button type="submit">Отправить</button>
+    </form>
   );
 };
 
 export default MessageInput;
+
+/* <Form onSubmit={f.handleSubmit}>
+  <FormGroup className="sender">
+    <FormControl
+      name="text"
+      type="text"
+      placeholder={t('placeholder.message')}
+      onChange={f.handleChange}
+      value={f.values.text}
+      isInvalid={!!f.status}
+      disabled={f.isSubmitting}
+      ref={inputRef}
+    />
+    <FormControl.Feedback type="invalid">{f.status}</FormControl.Feedback>
+  </FormGroup>
+</Form>; */

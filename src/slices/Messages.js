@@ -18,11 +18,13 @@ const slice = createSlice({
   },
 });
 
-const addMessage = ({ activeChannel, userName, text }) => async () => {
-  const data = { attributes: { userName, text } };
-  const url = routes.channelMessagesPath(activeChannel);
-  await axios.post(url, { data });
-};
+const addMessage =
+  ({ activeChannel, userName, text }) =>
+  async () => {
+    const data = { attributes: { userName, text } };
+    const url = routes.channelMessagesPath(activeChannel);
+    await axios.post(url, { data });
+  };
 
 const messages = slice.reducer;
 const messagesActions = slice.actions;

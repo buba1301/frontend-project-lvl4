@@ -10,7 +10,6 @@ const slice = createSlice({
   },
 });
 
-
 const modalInfo = slice.reducer;
 const modalActions = slice.actions;
 

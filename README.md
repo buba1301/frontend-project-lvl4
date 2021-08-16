@@ -4,7 +4,7 @@
 
 ### Requirements
 
-* [Heroku CLI](https://still-waters-26133.herokuapp.com/)
+- [Heroku CLI](https://still-waters-26133.herokuapp.com/)
 
 ### Install
 

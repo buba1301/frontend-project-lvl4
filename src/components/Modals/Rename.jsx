@@ -61,9 +61,7 @@ const Rename = () => {
               isInvalid={!!channel.status}
               disabled={channel.isSubmitting}
             />
-            <FormControl.Feedback type="invalid">
-              {channel.status}
-            </FormControl.Feedback>
+            <FormControl.Feedback type="invalid">{channel.status}</FormControl.Feedback>
           </FormGroup>
           <SubmitButton isSubmitting={channel.isSubmitting} />
         </form>

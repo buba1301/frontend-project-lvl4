@@ -1,22 +1,21 @@
 ---
+extends:
+  - airbnb
+  - 'plugin:jest/recommended'
 
-    extends:
-      - airbnb
-      - "plugin:jest/recommended"
-    
-    parser: babel-eslint
-    
-    env:
-      browser: true
-      node: true
-      jest: true
-    
-    settings:
-      import/resolver:
-        - node
-        - webpack
-    
-    rules:
-      import/extensions: 0
-      react/prop-types: 0
-      no-console: 0
+parser: babel-eslint
+
+env:
+  browser: true
+  node: true
+  jest: true
+
+settings:
+  import/resolver:
+    - node
+    - webpack
+
+rules:
+  import/extensions: 0
+  react/prop-types: 0
+  no-console: 0

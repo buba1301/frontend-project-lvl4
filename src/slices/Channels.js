@@ -18,44 +18,48 @@ const slice = createSlice({
   },
 });
 
-const addChannel = ({ name }) => async (dispatch) => {
-  dispatch(modalActions.modalRequest());
-  try {
-    const data = { attributes: { name } };
-    const url = routes.channelsPath();
-    await axios.post(url, { data });
-  } catch (e) {
-    console.log(e);
-    throw e;
-  }
-};
+const addChannel =
+  ({ name }) =>
+  async (dispatch) => {
+    dispatch(modalActions.modalRequest());
+    try {
+      const data = { attributes: { name } };
+      const url = routes.channelsPath();
+      await axios.post(url, { data });
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
+  };
 
-const renameChannel = ({ name, currentId }) => async (dispatch) => {
-  dispatch(modalActions.modalRequest());
-  try {
-    const data = { attributes: { name } };
-    const url = routes.channelPath(currentId);
-    await axios.patch(url, { data });
-  } catch (e) {
-    console.log(e);
-    throw e;
-  }
-};
+const renameChannel =
+  ({ name, currentId }) =>
+  async (dispatch) => {
+    dispatch(modalActions.modalRequest());
+    try {
+      const data = { attributes: { name } };
+      const url = routes.channelPath(currentId);
+      await axios.patch(url, { data });
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
+  };
 
-const removeChannel = ({ id }) => async (dispatch) => {
-  dispatch(modalActions.modalRequest());
-  try {
-    const url = routes.channelPath(id);
-    await axios.delete(url);
-  } catch (e) {
-    console.log(e);
-    throw e;
-  }
-};
+const removeChannel =
+  ({ id }) =>
+  async (dispatch) => {
+    dispatch(modalActions.modalRequest());
+    try {
+      const url = routes.channelPath(id);
+      await axios.delete(url);
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
+  };
 
 const channels = slice.reducer;
 const channelsActions = slice.actions;
 
-export {
-  channels, channelsActions, addChannel, renameChannel, removeChannel,
-};
+export { channels, channelsActions, addChannel, renameChannel, removeChannel };

@@ -38,12 +38,8 @@ const Remove = () => {
       </Modal.Header>
       <Modal.Body>
         <form onSubmit={channel.handleSubmit}>
-          <h6 className="text-dark">
-            {t('modal.remove.text')}
-          </h6>
-          <h6 className="text-danger">
-            {channel.status}
-          </h6>
+          <h6 className="text-dark">{t('modal.remove.text')}</h6>
+          <h6 className="text-danger">{channel.status}</h6>
           <SubmitButton isSubmitting={channel.isSubmitting} />
         </form>
       </Modal.Body>

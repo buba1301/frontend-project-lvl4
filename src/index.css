@@ -42,7 +42,7 @@ select {
 body {
   background: var(--background);
   color: var(--color);
-  font: 14px "Open Sans", sans-serif;
+  font: 14px 'Open Sans', sans-serif;
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
 
@@ -60,4 +60,16 @@ body {
   display: flex;
   flex-direction: column;
   margin: auto;
+}
+
+.wrap {
+  display: flex;
+  width: 100%;
+}
+
+.chat {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

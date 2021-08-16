@@ -1,7 +1,7 @@
 // @ts-check
 
 import _ from 'lodash';
-import defaultMessages from '../src/data';
+import defaultMessages from './data';
 
 const getNextId = () => Number(_.uniqueId());
 
@@ -122,6 +122,7 @@ export default (app, io, defaultState = {}) => {
       const {
         data: { attributes },
       } = req.body;
+
       const message = {
         ...attributes,
         channelId: Number(req.params.channelId),

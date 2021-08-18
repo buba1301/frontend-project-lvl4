@@ -2,6 +2,7 @@ import React, { useContext, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
+import faker from 'faker';
 import { asyncActions } from '../../slices/index.js';
 import Context from '../../context';
 
@@ -26,7 +27,9 @@ const MessageInput = () => {
 
     const date = new Date();
 
-    const messageData = { activeChannel, userName, message, date };
+    const avatar = 'https://sun9-58.userapi.com/c836638/v836638514/867c/SPMigNB8gw0.jpg';
+
+    const messageData = { activeChannel, userName, message, date, avatar };
 
     try {
       await dispatch(addMessage(messageData));

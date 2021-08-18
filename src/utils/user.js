@@ -11,6 +11,7 @@ export default () => {
   if (userName) {
     return userName;
   }
+
   const newUserName = faker.internet.userName();
   useCookies.set(newUserName);
   return newUserName;

@@ -1,6 +1,7 @@
 ---
 extends:
   - airbnb
+  -prettier
   - 'plugin:jest/recommended'
 
 parser: babel-eslint
@@ -19,3 +20,4 @@ rules:
   import/extensions: 0
   react/prop-types: 0
   no-console: 0
+  object-curly-newline: 0

@@ -21,10 +21,13 @@ const MessageInput = () => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = async ({ text }, { resetForm, setStatus }) => {
+  const handleSubmit = async ({ message }, { resetForm, setStatus }) => {
     const { addMessage } = asyncActions;
 
-    const messageData = { activeChannel, userName, text };
+    const date = new Date();
+
+    const messageData = { activeChannel, userName, message, date };
+
     try {
       await dispatch(addMessage(messageData));
     } catch (e) {
@@ -35,7 +38,7 @@ const MessageInput = () => {
 
   const f = useFormik({
     initialValues: {
-      text: '',
+      message: '',
     },
     onSubmit: handleSubmit,
   });
@@ -43,11 +46,11 @@ const MessageInput = () => {
   return (
     <form className="sender" onSubmit={f.handleSubmit}>
       <input
-        name="text"
+        name="message"
         type="text"
         placeholder={t('placeholder.message')}
         onChange={f.handleChange}
-        value={f.values.text}
+        value={f.values.message}
         isInvalid={!!f.status}
         disabled={f.isSubmitting}
         ref={inputRef}
@@ -59,19 +62,3 @@ const MessageInput = () => {
 };
 
 export default MessageInput;
-
-/* <Form onSubmit={f.handleSubmit}>
-  <FormGroup className="sender">
-    <FormControl
-      name="text"
-      type="text"
-      placeholder={t('placeholder.message')}
-      onChange={f.handleChange}
-      value={f.values.text}
-      isInvalid={!!f.status}
-      disabled={f.isSubmitting}
-      ref={inputRef}
-    />
-    <FormControl.Feedback type="invalid">{f.status}</FormControl.Feedback>
-  </FormGroup>
-</Form>; */

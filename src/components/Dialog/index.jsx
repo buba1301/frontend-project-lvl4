@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useSelector } from 'react-redux';
+import Context from '../../context';
 import Message from '../Messege';
 
 import normalizeDialog from './helpers';
@@ -9,7 +10,9 @@ import './styles.css';
 const Dialog = () => {
   const messages = useSelector((state) => state.messages);
 
-  const normalizedDialog = normalizeDialog(messages);
+  const userName = useContext(Context);
+
+  const normalizedDialog = normalizeDialog(messages, userName);
 
   return (
     <div className="dialog">

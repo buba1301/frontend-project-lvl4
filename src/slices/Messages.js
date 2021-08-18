@@ -19,9 +19,9 @@ const slice = createSlice({
 });
 
 const addMessage =
-  ({ activeChannel, userName, text }) =>
+  ({ activeChannel, userName, message, date }) =>
   async () => {
-    const data = { attributes: { userName, text } };
+    const data = { attributes: { userName, message, date } };
     const url = routes.channelMessagesPath(activeChannel);
     await axios.post(url, { data });
   };

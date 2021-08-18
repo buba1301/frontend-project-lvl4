@@ -3,11 +3,11 @@
 import _ from 'lodash';
 import defaultMessages from './data';
 
-const getNextId = () => Number(_.uniqueId());
+const getNextId = (value) => `${value}_${Number(_.uniqueId())}`;
 
 const buildState = (defaultState) => {
-  const generalChannelId = getNextId();
-  const randomChannelId = getNextId();
+  const generalChannelId = getNextId('channel');
+  const randomChannelId = getNextId('channel');
   const state = {
     channels: [
       { id: generalChannelId, name: 'general', removable: false },
@@ -15,6 +15,7 @@ const buildState = (defaultState) => {
     ],
     messages: [...defaultMessages],
     currentChannelId: generalChannelId,
+    users: [],
   };
 
   if (defaultState.messages) {
@@ -37,6 +38,28 @@ export default (app, io, defaultState = {}) => {
     .get('/', (_req, reply) => {
       reply.view('index.pug', { gon: state });
     })
+    .post('/api/v1/channels/:channelId/users', (req, reply) => {
+      const {
+        data: { attributes },
+      } = req.body;
+      const user = {
+        ...attributes,
+        id: getNextId('user'),
+        channelId: req.params.channelId,
+      };
+      state.users.push(user);
+      reply.code(201);
+      const data = {
+        data: {
+          type: 'users',
+          id: user.id,
+          attributes: user,
+        },
+      };
+
+      reply.send(data);
+      io.emit('newUser', data); // отправить событие на все подключенные сокеты
+    })
     .get('/api/v1/channels', (_req, reply) => {
       const resources = state.channels.map((c) => ({
         type: 'channels',
@@ -57,7 +80,7 @@ export default (app, io, defaultState = {}) => {
       const channel = {
         name,
         removable: true,
-        id: getNextId(),
+        id: getNextId('channel'),
       };
       state.channels.push(channel);
       reply.code(201);
@@ -125,8 +148,8 @@ export default (app, io, defaultState = {}) => {
 
       const message = {
         ...attributes,
-        channelId: Number(req.params.channelId),
-        id: getNextId(),
+        channelId: req.params.channelId,
+        id: getNextId('message'),
       };
       state.messages.push(message);
       reply.code(201);

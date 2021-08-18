@@ -8,8 +8,13 @@ import './index.css';
 const App = () => (
   <div className="container">
     <Header />
-    <Dialog />
-    <MessageInput />
+    <div className="main">
+      <div className="chats"></div>
+      <div className="dialogWrap">
+        <Dialog />
+        <MessageInput />
+      </div>
+    </div>
   </div>
 );
 

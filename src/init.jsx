@@ -21,6 +21,8 @@ export default (gon) => {
 
   const userName = getUserName();
 
+  //TODO: добавить форму добавления юсера
+
   socket.on('newMessage', ({ data }) => {
     const { attributes } = data;
     store.dispatch(actions.addMessagesSuccess([attributes]));

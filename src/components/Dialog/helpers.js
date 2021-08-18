@@ -1,49 +1,11 @@
-const normalizeDialog = (dialog) => {
+const normalizeDialog = (dialog, userName) => {
   const mapMessage = dialog.map((message) => ({
     ...message,
-    isReverse: message.userName === 'My',
-    isRemovable: message.userName === 'My',
+    isReverse: message.userName === userName,
+    isRemovable: message.userName === userName,
   }));
 
   return mapMessage;
 };
 
 export default normalizeDialog;
-
-/*
-const newDialog = [];
-
-  dialog.forEach((item, i) => {
-    if (i === 0 || item.is !== dialog[i - 1].is) {
-      newDialog.push({
-        type: 'message',
-        id: `item-message-${item.id}`,
-        avatar: item.avatar,
-        isReverse: item.is === 'my',
-        isRemovable: item.is === 'my',
-        messages: [
-          {
-            text: item.message,
-            status: item.status,
-            id: item.id,
-            date: item.date,
-          },
-        ],
-      });
-    } else {
-      const position = newDialog.length - 1;
-
-      newDialog[position] = {
-        ...newDialog[position],
-        messages: newDialog[position].messages.concat({
-          text: item.message,
-          status: item.status,
-          id: item.id,
-          date: item.date,
-        }),
-      };
-    }
-  });
-
-  return newDialog;
-*/

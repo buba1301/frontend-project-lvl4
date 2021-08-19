@@ -1,5 +1,7 @@
 .dialog {
-  flex-grow: 1;
+  width: 100%;
+  height: 600px;
+  flex-grow: 2;
   position: relative;
 }
 

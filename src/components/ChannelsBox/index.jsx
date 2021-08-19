@@ -2,7 +2,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
+import { IoIosAddCircle } from 'react-icons/io';
 import { actions } from '../../slices';
+
+import './styles.css';
+import Channel from '../Channel';
+import { log } from 'debug';
 
 const renderChannel = (id, name, activeChannel, onClick) => {
   const buttonClasses = cn('nav-link btn btn-block', {
@@ -18,9 +23,11 @@ const renderChannel = (id, name, activeChannel, onClick) => {
   );
 };
 
-const ChannelsBox = ({ handleModal }) => {
+const ChannelsBox = () => {
   const channels = useSelector((state) => state.channels);
   const activeChannel = useSelector((state) => state.activeChannel);
+
+  console.log('CHANNEL BOX', channels);
 
   const { setActiveChannel } = actions;
 
@@ -31,18 +38,26 @@ const ChannelsBox = ({ handleModal }) => {
   };
 
   return (
-    <div className="col-3 border-right">
-      <div className="d-flex mb-2">
-        <span>Channels</span>
-        <button type="button" className="btn btn-link p-0 ml-auto" onClick={handleModal('adding')}>
-          +
-        </button>
+    <div className="channelWrap">
+      <div className="channelHeader">
+        <div className="nameWrap">Channels</div>
+        <IoIosAddCircle size={25} className="addIcon" />
       </div>
-      <ul className="nav flex-column nav-pills nav-fill">
-        {channels.map(({ id, name }) => renderChannel(id, name, activeChannel, handleSetActiveChannel))}
-      </ul>
+      <div className="itemsWrap">
+        {channels.map(({ id, name }) => (
+          <Channel
+            key={id}
+            id={id}
+            name={name}
+            activeChannel={activeChannel}
+            onClick={handleSetActiveChannel}
+          />
+        ))}
+      </div>
     </div>
   );
 };
 
 export default ChannelsBox;
+
+//  {channels.map(({ id, name }) => renderChannel(id, name, activeChannel, handleSetActiveChannel))}

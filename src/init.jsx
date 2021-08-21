@@ -15,17 +15,24 @@ const socket = io({
 export default (gon) => {
   const defaultId = gon.currentChannelId;
 
+  console.log('GON', gon);
+
   store.dispatch(actions.getDataChannels(gon));
+  store.dispatch(actions.getDataUsers(gon));
   store.dispatch(actions.getDataMessages(gon));
   store.dispatch(actions.setActiveChannel(gon.currentChannelId));
 
   const userName = getUserName();
 
-  //TODO: добавить форму добавления юсера
+  // TODO: добавить форму добавления юсера
 
   socket.on('newMessage', ({ data }) => {
     const { attributes } = data;
     store.dispatch(actions.addMessagesSuccess([attributes]));
+  });
+  socket.on('newUser', ({ data }) => {
+    const { attributes } = data;
+    store.dispatch(actions.addUserSuccess([attributes]));
   });
   socket.on('newChannel', ({ data }) => {
     const { attributes, id } = data;

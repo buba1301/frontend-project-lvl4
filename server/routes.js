@@ -38,6 +38,21 @@ export default (app, io, defaultState = {}) => {
     .get('/', (_req, reply) => {
       reply.view('index.pug', { gon: state });
     })
+    .get('/api/v1/channels/:channelId/users', (req, reply) => {
+      const users = state.users.filter((m) => m.channelId === req.params.channelId);
+
+      const resources = users.map((m) => ({
+        type: 'messages',
+        id: m.id,
+        attributes: m,
+      }));
+
+      const response = {
+        data: resources,
+      };
+
+      reply.send(response);
+    })
     .post('/api/v1/channels/:channelId/users', (req, reply) => {
       const {
         data: { attributes },

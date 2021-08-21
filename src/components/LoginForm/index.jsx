@@ -1,6 +1,11 @@
 import React, { useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { TextInput, Button, Modal } from '@mantine/core';
+import { useTranslation } from 'react-i18next';
+
 import { useForm } from '@mantine/hooks';
+
+import { asyncActions } from '../../slices/index.js';
 
 import './styles.css';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
@@ -8,6 +13,12 @@ import useOnClickOutside from '../../hooks/useOnClickOutside';
 const Form = () => {
   const [opened, setOpened] = useState(true);
   const [error, setError] = useState(null);
+
+  const { t } = useTranslation();
+
+  const activeChannel = useSelector((state) => state.activeChannel);
+
+  const dispatch = useDispatch();
 
   const ref = useRef(null);
 
@@ -27,8 +38,18 @@ const Form = () => {
     form.setFieldError('email', true);
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     console.log(values);
+    const { addUser } = asyncActions;
+
+    const userData = { userName: values.email, activeChannel };
+
+    try {
+      await dispatch(addUser(userData));
+    } catch (e) {
+      setError(t('errors.network'));
+    }
+
     setOpened(false);
   };
 

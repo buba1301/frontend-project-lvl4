@@ -42,13 +42,16 @@ export default (app, io, defaultState = {}) => {
       const {
         data: { attributes },
       } = req.body;
+
       const user = {
         ...attributes,
         id: getNextId('user'),
         channelId: req.params.channelId,
       };
+
       state.users.push(user);
       reply.code(201);
+
       const data = {
         data: {
           type: 'users',

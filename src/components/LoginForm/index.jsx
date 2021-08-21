@@ -4,8 +4,9 @@ import { TextInput, Button, Modal } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 
 import { useForm } from '@mantine/hooks';
+import setCurrentUserCookie from '../../utils/user';
 
-import { asyncActions } from '../../slices/index.js';
+import { asyncActions, actions } from '../../slices/index.js';
 
 import './styles.css';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
@@ -39,12 +40,15 @@ const Form = () => {
   };
 
   const handleSubmit = async (values) => {
-    console.log(values);
     const { addUser } = asyncActions;
 
-    const userData = { userName: values.email, activeChannel };
+    const userName = values.email;
+
+    const userData = { userName, activeChannel };
 
     try {
+      dispatch(actions.setCurrentUser(userName));
+      setCurrentUserCookie(userName);
       await dispatch(addUser(userData));
     } catch (e) {
       setError(t('errors.network'));

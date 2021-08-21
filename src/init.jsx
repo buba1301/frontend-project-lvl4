@@ -5,8 +5,6 @@ import io from 'socket.io-client';
 import { actions } from './slices';
 import store from './lib/store';
 import App from './App';
-import getUserName from './utils/user';
-import Context from './context';
 
 const socket = io({
   transports: ['websocket'],
@@ -22,9 +20,7 @@ export default (gon) => {
   store.dispatch(actions.getDataMessages(gon));
   store.dispatch(actions.setActiveChannel(gon.currentChannelId));
 
-  const userName = getUserName();
-
-  // TODO: добавить форму добавления юсера
+  // TODO: сохранять усера в куки и фильтровать юсеров в зависимости от канала
 
   socket.on('newMessage', ({ data }) => {
     const { attributes } = data;
@@ -49,9 +45,7 @@ export default (gon) => {
 
   render(
     <Provider store={store}>
-      <Context.Provider value={userName}>
-        <App />
-      </Context.Provider>
+      <App />
     </Provider>,
     document.getElementById('chat'),
   );

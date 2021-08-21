@@ -4,6 +4,7 @@ import { channels, channelsActions, addChannel, renameChannel, removeChannel } f
 import { messages, messagesActions, addMessage } from './Messages';
 import { activeChannel, activeChannelActions } from './ActiveChannel';
 import { modalInfo, modalActions } from './Modal';
+import { currentUser, currentUserActions } from './CurrentUser';
 
 const actions = {
   ...channelsActions,
@@ -11,6 +12,7 @@ const actions = {
   ...activeChannelActions,
   ...modalActions,
   ...usersActions,
+  ...currentUserActions,
 };
 
 const asyncActions = {
@@ -28,5 +30,6 @@ export default combineReducers({
   channels,
   messages,
   activeChannel,
+  currentUser,
   modalInfo,
 });

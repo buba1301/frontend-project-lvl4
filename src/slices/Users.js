@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import routes from '../routes';
-import { channelsActions } from './Channels';
 
 const slice = createSlice({
   name: 'users',
@@ -13,7 +12,7 @@ const addUser =
   ({ activeChannel, userName }) =>
   async () => {
     const data = { attributes: { userName } };
-    const url = routes.channelMessagesPath(activeChannel);
+    const url = routes.channelUsersPath(activeChannel);
     await axios.post(url, { data });
   };
 

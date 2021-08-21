@@ -5,7 +5,10 @@ import routes from '../routes';
 const slice = createSlice({
   name: 'users',
   initialState: [],
-  reducers: {},
+  reducers: {
+    getDataUsers: (state, { payload: { users } }) => [...state, ...users],
+    addUserSuccess: (state, { payload }) => [...state, ...payload],
+  },
 });
 
 const addUser =

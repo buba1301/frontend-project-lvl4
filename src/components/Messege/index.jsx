@@ -9,8 +9,6 @@ import './styles.css';
 
 // eslint-disable-next-line object-curly-newline
 const Message = ({ isReverse, isRemovable, message, avatar, id, date }) => {
-  console.log('IsReverse', isReverse);
-
   return (
     <div
       className={classNames('item', {
@@ -31,13 +29,13 @@ const Message = ({ isReverse, isRemovable, message, avatar, id, date }) => {
   );
 };
 
-/* Message.propTypes = {
+Message.propTypes = {
   isReverse: PropTypes.bool.isRequired,
   isRemovable: PropTypes.bool.isRequired,
   avatar: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-}; */
+};
 
 export default Message;

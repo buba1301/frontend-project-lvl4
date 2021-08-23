@@ -6,6 +6,9 @@
   "bin": {
     "slack": "dist/bin/slack.js"
   },
+  "engines": {
+    "node": "12.16.3"
+  },
   "dependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.6",

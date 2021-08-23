@@ -2,7 +2,7 @@ import React, { useContext, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import faker from 'faker';
+// import faker from 'faker';
 import { asyncActions } from '../../slices/index.js';
 import Context from '../../context';
 
@@ -16,6 +16,7 @@ const MessageInput = () => {
   const userName = useContext(Context);
 
   const inputRef = useRef();
+
   useEffect(() => {
     inputRef.current.focus();
   });

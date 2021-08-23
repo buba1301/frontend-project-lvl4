@@ -8,6 +8,7 @@ const getNextId = (value) => `${value}_${Number(_.uniqueId())}`;
 const buildState = (defaultState) => {
   const generalChannelId = getNextId('channel');
   const randomChannelId = getNextId('channel');
+
   const state = {
     channels: [
       { id: generalChannelId, name: 'general', removable: false },
@@ -42,7 +43,7 @@ export default (app, io, defaultState = {}) => {
       const users = state.users.filter((m) => m.channelId === req.params.channelId);
 
       const resources = users.map((m) => ({
-        type: 'messages',
+        type: 'users',
         id: m.id,
         attributes: m,
       }));

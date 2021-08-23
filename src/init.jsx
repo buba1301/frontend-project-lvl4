@@ -13,14 +13,12 @@ const socket = io({
 export default (gon) => {
   const defaultId = gon.currentChannelId;
 
-  console.log('GON', gon);
-
   store.dispatch(actions.getDataChannels(gon));
   store.dispatch(actions.getDataUsers(gon));
   store.dispatch(actions.getDataMessages(gon));
   store.dispatch(actions.setActiveChannel(gon.currentChannelId));
 
-  // TODO: удалить контекст, использовать редакс тулкит
+  // TODO: add userName in message header
 
   socket.on('newMessage', ({ data }) => {
     const { attributes } = data;

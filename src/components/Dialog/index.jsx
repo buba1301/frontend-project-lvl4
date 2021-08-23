@@ -16,10 +16,9 @@ const selectActiveMassages = createSelector(
 
 const Dialog = () => {
   const activeMessages = useSelector((state) => selectActiveMassages(state));
+  const userName = useSelector((state) => state.currentUser);
 
   const messageEl = useRef(null);
-
-  const userName = useContext(Context);
 
   const normalizedDialog = normalizeDialog(activeMessages, userName);
 
@@ -35,8 +34,8 @@ const Dialog = () => {
   return (
     <div className="dialog">
       <div className="overflow" ref={messageEl}>
-        {normalizedDialog
-          && normalizedDialog.map((item) => (
+        {normalizedDialog &&
+          normalizedDialog.map((item) => (
             <Message
               key={item.id}
               avatar={item.avatar}

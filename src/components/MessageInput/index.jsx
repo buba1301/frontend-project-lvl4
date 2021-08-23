@@ -13,7 +13,7 @@ const MessageInput = () => {
 
   const activeChannel = useSelector((state) => state.activeChannel);
 
-  const userName = useContext(Context);
+  const userName = useSelector((state) => state.currentUser);
 
   const inputRef = useRef();
 

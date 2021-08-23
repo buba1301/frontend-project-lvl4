@@ -1,7 +1,6 @@
 ---
 extends:
   - airbnb
-  -prettier
   - 'plugin:jest/recommended'
 
 parser: babel-eslint

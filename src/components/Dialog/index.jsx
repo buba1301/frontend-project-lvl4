@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect';
 import Context from '../../context';
 import Message from '../Messege';
 
@@ -25,27 +25,28 @@ const Dialog = () => {
 
   useEffect(() => {
     if (messageEl) {
-      messageEl.current.addEventListener('DOMNodeInserted', event => {
+      messageEl.current.addEventListener('DOMNodeInserted', (event) => {
         const { currentTarget: target } = event;
         target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
       });
     }
-  }, [])
+  }, []);
 
   return (
     <div className="dialog">
       <div className="overflow" ref={messageEl}>
-        {normalizedDialog && normalizedDialog.map((item) => (
-          <Message
-            key={item.id}
-            avatar={item.avatar}
-            message={item.message}
-            id={item.id}
-            date={item.date}
-            isReverse={item.isReverse}
-            isRemovable={item.isRemovable}
-          />
-        ))}
+        {normalizedDialog
+          && normalizedDialog.map((item) => (
+            <Message
+              key={item.id}
+              avatar={item.avatar}
+              message={item.message}
+              id={item.id}
+              date={item.date}
+              isReverse={item.isReverse}
+              isRemovable={item.isRemovable}
+            />
+          ))}
       </div>
     </div>
   );

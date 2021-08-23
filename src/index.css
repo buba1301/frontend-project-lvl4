@@ -22,6 +22,7 @@ body {
   --color: white;
   --accent-1: #21242d;
   --accent-2: #a1a1a1;
+  --accent-3: #339af0;
   --background: #1b1c23;
   --border: #262a30;
   --primary: #7045ff;
@@ -62,19 +63,28 @@ body {
   margin: auto;
 }
 
+.is-blurred {
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+}
+
 .main {
   display: flex;
   width: 100%;
+  min-height: 100vh;
 }
 
 .chats {
   width: 30%;
-  background-color: red;
+  border-right: 1px solid var(--border);
 }
 
 .dialogWrap {
+  height: 100%;
   display: flex;
   flex-grow: 1;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   margin: auto;
 }

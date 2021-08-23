@@ -31,4 +31,7 @@ publish:
 deploy:
 	git push heroku master
 
+deploy-2:
+	git push heroku Version2.0
+
 .PHONY: test

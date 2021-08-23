@@ -4,28 +4,28 @@
 }
 
 .channelHeader {
-	width: 100%;
+  width: 100%;
   height: 50px;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .nameWrap {
-	width: 70%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .addIcon {
-	margin-left: 20px;
+  margin-left: 20px;
   cursor: pointer;
-	fill: var(--primary);
+  fill: var(--primary);
 }
 
 .itemsWrap {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }

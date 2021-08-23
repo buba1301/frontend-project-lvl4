@@ -20,7 +20,7 @@ export default (gon) => {
   store.dispatch(actions.getDataMessages(gon));
   store.dispatch(actions.setActiveChannel(gon.currentChannelId));
 
-  // TODO: сохранять усера в куки и фильтровать юсеров в зависимости от канала
+  // TODO: удалить контекст, использовать редакс тулкит
 
   socket.on('newMessage', ({ data }) => {
     const { attributes } = data;

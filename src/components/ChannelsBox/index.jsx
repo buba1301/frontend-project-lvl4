@@ -1,13 +1,11 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import cn from 'classnames';
 import { IoIosAddCircle } from 'react-icons/io';
 import { actions } from '../../slices';
 
 import './styles.css';
 import Channel from '../Channel';
-import { log } from 'debug';
 
 const ChannelsBox = () => {
   const channels = useSelector((state) => state.channels);
@@ -29,13 +27,7 @@ const ChannelsBox = () => {
       </div>
       <div className="itemsWrap">
         {channels.map(({ id, name }) => (
-          <Channel
-            key={id}
-            id={id}
-            name={name}
-            activeChannel={activeChannel}
-            onClick={handleSetActiveChannel}
-          />
+          <Channel key={id} id={id} name={name} activeChannel={activeChannel} onClick={handleSetActiveChannel} />
         ))}
       </div>
     </div>

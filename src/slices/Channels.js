@@ -21,7 +21,6 @@ const slice = createSlice({
 const addChannel =
   ({ name }) =>
   async (dispatch) => {
-    dispatch(modalActions.modalRequest());
     try {
       const data = { attributes: { name } };
       const url = routes.channelsPath();
@@ -49,7 +48,6 @@ const renameChannel =
 const removeChannel =
   ({ id }) =>
   async (dispatch) => {
-    dispatch(modalActions.modalRequest());
     try {
       const url = routes.channelPath(id);
       await axios.delete(url);

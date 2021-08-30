@@ -1,10 +1,9 @@
-import React, { useContext, useRef, useEffect } from 'react';
+/* eslint-disable object-curly-newline */
+import React, { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-// import faker from 'faker';
-import { asyncActions } from '../../slices/index.js';
-import Context from '../../context';
+import { asyncActions } from '../../slices/index';
 
 import './styles.css';
 

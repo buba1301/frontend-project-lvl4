@@ -7,13 +7,9 @@ const getNextId = (value) => `${value}_${Number(_.uniqueId())}`;
 
 const buildState = (defaultState) => {
   const generalChannelId = getNextId('channel');
-  const randomChannelId = getNextId('channel');
 
   const state = {
-    channels: [
-      { id: generalChannelId, name: 'general', removable: false },
-      { id: randomChannelId, name: 'random', removable: false },
-    ],
+    channels: [{ id: generalChannelId, name: 'general', removable: false }],
     messages: [...defaultMessages],
     currentChannelId: generalChannelId,
     users: [],
@@ -115,7 +111,7 @@ export default (app, io, defaultState = {}) => {
       io.emit('newChannel', data); // отправить событие на все подключенные сокеты
     })
     .delete('/api/v1/channels/:id', (req, reply) => {
-      const channelId = Number(req.params.id);
+      const channelId = req.params.id;
       state.channels = state.channels.filter((c) => c.id !== channelId);
       state.messages = state.messages.filter((m) => m.channelId !== channelId);
       reply.code(204);
@@ -130,12 +126,13 @@ export default (app, io, defaultState = {}) => {
       io.emit('removeChannel', data); // отправить событие на все подключенные сокеты
     })
     .patch('/api/v1/channels/:id', (req, reply) => {
-      const channelId = Number(req.params.id);
+      const channelId = req.params.id;
       const channel = state.channels.find((c) => c.id === channelId);
 
       const {
         data: { attributes },
       } = req.body;
+
       channel.name = attributes.name;
 
       const data = {

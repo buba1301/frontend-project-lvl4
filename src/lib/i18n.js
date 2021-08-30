@@ -17,7 +17,7 @@ const resources = {
         },
         remove: {
           header: 'Remove channel',
-          text: 'Are you sure you want to remove this channel? All messages will be deleted.',
+          text: 'Are you sure you want to remove this channel?',
         },
       },
       placeholder: {
@@ -25,9 +25,9 @@ const resources = {
         message: 'Write your message and press enter',
       },
       button: {
-        adding: 'Add',
-        renaming: 'Rename',
-        removing: 'Remove',
+        add: 'Add',
+        rename: 'Rename',
+        remove: 'Remove',
       },
     },
   },

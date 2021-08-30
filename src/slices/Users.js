@@ -16,7 +16,7 @@ const addUser =
   async () => {
     const data = { attributes: { userName } };
     const url = routes.channelUsersPath(activeChannel);
-    await axios.post(url, { data });
+    const res = await axios.post(url, { data });
   };
 
 const users = slice.reducer;

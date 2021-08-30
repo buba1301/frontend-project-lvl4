@@ -1,7 +1,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable operator-linebreak */
 /* eslint-disable indent */
-/* eslint-disable max-len */
+/* eslint-disable arrow-body-style */
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import routes from '../routes';
@@ -11,13 +11,18 @@ const slice = createSlice({
   name: 'channels',
   initialState: [],
   reducers: {
-    getDataChannels: (state, { payload: { channels } }) => [...state, ...channels],
+    getDataChannels: (state, { payload: { channels } }) => [
+      ...state,
+      ...channels,
+    ],
     addChannelSuccess: (state, { payload }) => [...state, ...payload],
     renameChannelSuccess: (state, { payload: { id, attributes } }) => {
       const filterChannel = state.filter((channel) => channel.id !== id);
       return [...filterChannel, attributes];
     },
-    removeChannelSuccess: (state, { payload: { id } }) => state.filter((channel) => channel.id !== id),
+    removeChannelSuccess: (state, { payload: { id } }) => {
+      return state.filter((channel) => channel.id !== id);
+    },
   },
 });
 

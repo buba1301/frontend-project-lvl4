@@ -3,8 +3,8 @@ import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Modal } from 'react-bootstrap';
-import { asyncActions, actions } from '../../slices/index.js';
-import SubmitButton from './SubmitButton.jsx';
+import { asyncActions, actions } from '../../slices/index';
+import SubmitButton from './SubmitButton';
 
 const Remove = () => {
   const { t } = useTranslation();

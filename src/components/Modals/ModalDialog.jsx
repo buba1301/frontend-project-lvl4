@@ -1,5 +1,7 @@
+/* eslint-disable object-curly-newline */
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { TextInput, Button, Modal, Checkbox } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 
@@ -10,6 +12,8 @@ import { asyncActions, actions } from '../../slices/index';
 import './styles.css';
 
 const ModalDialog = ({ opened, setOpened, modalType }) => {
+  const [toogle, setToogle] = useState(false);
+  const [id, setId] = useState('');
   const [error, setError] = useState(null);
 
   const { t } = useTranslation();
@@ -50,14 +54,15 @@ const ModalDialog = ({ opened, setOpened, modalType }) => {
     }
   };
 
-  const handleRemove = async ({ id }) => {
+  const handleRemove = async (event) => {
+    event.preventDefault();
     try {
       await dispatch(asyncActions.removeChannel({ id }));
       actions.setActiveChannel('channel_1');
       setOpened(false);
-      form.setFieldValue('termsOfService', false);
+      setToogle(false);
     } catch (e) {
-      // setStatus(t('errors.network'));
+      setError(t('errors.network'));
     }
   };
 
@@ -69,8 +74,8 @@ const ModalDialog = ({ opened, setOpened, modalType }) => {
   };
 
   const handleChangeCheckBox = (event) => {
-    form.setFieldValue('termsOfService', event.currentTarget.checked);
-    form.setFieldValue('id', event.currentTarget.id);
+    setToogle(event.currentTarget.checked);
+    setId(event.currentTarget.id);
   };
 
   const onSubmitForm = {
@@ -78,6 +83,8 @@ const ModalDialog = ({ opened, setOpened, modalType }) => {
     remove: handleRemove,
     rename: handleSubmitRename,
   };
+
+  const isRemove = modalType === 'remove';
 
   return (
     <Modal
@@ -90,8 +97,8 @@ const ModalDialog = ({ opened, setOpened, modalType }) => {
       onClose={() => setOpened(false)}
       overlayOpacity={0.5}
     >
-      <form onSubmit={form.onSubmit(onSubmitForm[modalType])}>
-        {modalType !== 'remove' ? (
+      <form onSubmit={!isRemove ? form.onSubmit(onSubmitForm[modalType]) : onSubmitForm[modalType]}>
+        {!isRemove ? (
           <TextInput
             styles={{
               input: { backgroundColor: '#1b1c23', color: 'white' },
@@ -109,7 +116,7 @@ const ModalDialog = ({ opened, setOpened, modalType }) => {
             required
             styles={{ root: { marginTop: 20 }, label: { color: 'white' } }}
             label={t(`modal.${modalType}.text`)}
-            checked={form.values.termsOfService}
+            checked={toogle}
             onChange={handleChangeCheckBox}
             id={activeChannel}
           />
@@ -117,7 +124,7 @@ const ModalDialog = ({ opened, setOpened, modalType }) => {
 
         <Button
           styles={{
-            root: { backgroundColor: '#7045ff' },
+            root: { backgroundColor: !isRemove ? '#7045ff' : 'red' },
           }}
           className="button"
           type="submit"
@@ -129,4 +136,27 @@ const ModalDialog = ({ opened, setOpened, modalType }) => {
   );
 };
 
+ModalDialog.propTypes = {
+  opened: PropTypes.bool.isRequired,
+  setOpened: PropTypes.func.isRequired,
+  modalType: PropTypes.string.isRequired,
+};
+
 export default ModalDialog;
+
+// form.onSubmit(onSubmitForm[modalType])
+/* const handleRemove = async ({ id }) => {
+    try {
+      await dispatch(asyncActions.removeChannel({ id }));
+      actions.setActiveChannel('channel_1');
+      setOpened(false);
+      form.setFieldValue('termsOfService', false);
+    } catch (e) {
+      // setStatus(t('errors.network'));
+    }
+  }; */
+
+/* const handleChangeCheckBox = (event) => {
+    form.setFieldValue('termsOfService', event.currentTarget.checked);
+    form.setFieldValue('id', event.currentTarget.id);
+  }; */

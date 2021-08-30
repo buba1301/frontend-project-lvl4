@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useForm } from '@mantine/hooks';
 import setCurrentUserCookie from '../../utils/user';
 
-import { asyncActions, actions } from '../../slices/index.js';
+import { asyncActions, actions } from '../../slices/index';
 
 import './styles.css';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
@@ -40,8 +40,6 @@ const Form = () => {
   };
 
   const handleSubmit = async (values) => {
-    const { addUser } = asyncActions;
-
     const userName = values.email;
 
     const userData = { userName, activeChannel };
@@ -49,7 +47,7 @@ const Form = () => {
     try {
       dispatch(actions.setCurrentUser(userName));
       setCurrentUserCookie(userName);
-      await dispatch(addUser(userData));
+      await dispatch(asyncActions.addUser(userData));
     } catch (e) {
       setError(t('errors.network'));
     }

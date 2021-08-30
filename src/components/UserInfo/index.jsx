@@ -2,7 +2,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
-import { activeChannel } from '../../slices/ActiveChannel';
 import './styles.css';
 
 const selectActiveUsers = createSelector(
@@ -20,13 +19,8 @@ const selectChannelName = createSelector(
 const UserInfo = () => {
   const users = useSelector((state) => selectActiveUsers(state));
   const channelName = useSelector((state) => selectChannelName(state));
-  console.log('channelName', channelName);
-
-  console.log('UserInfo', users.length);
 
   const usersCount = users.length;
-
-  const activeChannel = useSelector((state) => state.activeChannel);
 
   return (
     <div className="user-info">

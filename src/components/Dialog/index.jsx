@@ -1,7 +1,8 @@
-import React, { useContext, useRef, useEffect } from 'react';
+/* eslint-disable operator-linebreak */
+import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
-import Context from '../../context';
+import useScrollDown from '../../hooks/useScrollDown';
 import Message from '../Messege';
 
 import normalizeDialog from './helpers';
@@ -22,14 +23,7 @@ const Dialog = () => {
 
   const normalizedDialog = normalizeDialog(activeMessages, userName);
 
-  useEffect(() => {
-    if (messageEl) {
-      messageEl.current.addEventListener('DOMNodeInserted', (event) => {
-        const { currentTarget: target } = event;
-        target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
-      });
-    }
-  }, []);
+  useScrollDown(messageEl);
 
   return (
     <div className="dialog">

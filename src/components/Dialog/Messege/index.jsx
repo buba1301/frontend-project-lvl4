@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import { IoIosTrash } from 'react-icons/io';
-import Icon from '../Icon';
+import Icon from '../../Icon';
 
-import { asyncActions, actions } from '../../slices/index';
+import { asyncActions } from '../../../slices/index';
 
 import './styles.css';
 
@@ -16,14 +16,10 @@ const Message = ({ isReverse, isRemovable, message, avatar, id, date }) => {
 
   const handleDeleteMessage = async (event) => {
     const currentMessageId = event.currentTarget.getAttribute('data-id');
-    console.log('DELETE MESSAGE', currentMessageId);
 
     try {
       await dispatch(asyncActions.removeMessage({ id: currentMessageId }));
-      console.log('Done');
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
 
   return (

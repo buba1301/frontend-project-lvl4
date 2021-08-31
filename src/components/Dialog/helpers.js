@@ -1,24 +1,6 @@
 import dayjs from 'dayjs';
 
 const normalizeDialog = (dialog, userName) => {
-  const mapMessage = dialog.map((message) => ({
-    ...message,
-    isReverse: message.userName === userName,
-    isRemovable: message.userName === userName,
-  }));
-
-  return mapMessage;
-};
-
-export default normalizeDialog;
-
-export const norm = (dialog, userName) => {
-  // const dateNow = dayjs(new Date().toISOString());
-
-  // const yesterday = dayjs().day(1);
-
-  // const diffe = yesterday.diff(dateNow, 'day');
-
   const newMessages = dialog.reduce((acc, message, index) => {
     if (index === 0 || dialog[index - 1]) {
       const first = dayjs((index === 0 ? message : dialog[index - 1]).date);
@@ -46,3 +28,5 @@ export const norm = (dialog, userName) => {
 
   return newMessages;
 };
+
+export default normalizeDialog;

@@ -1,13 +1,16 @@
+/* eslint-disable no-confusing-arrow */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable operator-linebreak */
 import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import useScrollDown from '../../hooks/useScrollDown';
-import Message from '../Messege';
+import Message from './Messege';
 
-import normalizeDialog, { norm } from './helpers';
+import normalizeDialog from './helpers';
 
 import './styles.css';
+import Title from './Title';
 
 const selectActiveMassages = createSelector(
   (state) => state.messages,
@@ -22,27 +25,31 @@ const Dialog = () => {
 
   const messageEl = useRef(null);
 
+  // const normalizedDialog = normalizeDialog(activeMessages, userName);
+
   const normalizedDialog = normalizeDialog(activeMessages, userName);
 
-  const nextNorm = norm(activeMessages, userName);
-
-  console.log('NEXTNOTMMESSAGE', nextNorm);
+  useScrollDown(messageEl);
 
   return (
     <div className="dialog">
       <div className="overflow" ref={messageEl}>
         {normalizedDialog &&
-          normalizedDialog.map((item) => (
-            <Message
-              key={item.id}
-              avatar={item.avatar}
-              message={item.message}
-              id={item.id}
-              date={item.date}
-              isReverse={item.isReverse}
-              isRemovable={item.isRemovable}
-            />
-          ))}
+          normalizedDialog.map((item) =>
+            item.type === 'message' ? (
+              <Message
+                key={item.id}
+                avatar={item.avatar}
+                message={item.message}
+                id={item.id}
+                date={item.date}
+                isReverse={item.isReverse}
+                isRemovable={item.isRemovable}
+              />
+            ) : (
+              <Title key={item.id} date={item.date} />
+            ),
+          )}
       </div>
     </div>
   );

@@ -25,18 +25,8 @@ const ChannelsBox = () => {
     dispatch(setActiveChannel(id));
   };
 
-  const handleAddChannel = () => {
-    setModalType('add');
-    setOpenedModal(true);
-  };
-
-  const handleDeleteChannel = () => {
-    setModalType('remove');
-    setOpenedModal(true);
-  };
-
-  const handleRenameChannel = () => {
-    setModalType('rename');
+  const handleClick = (type) => () => {
+    setModalType(type);
     setOpenedModal(true);
   };
 
@@ -45,7 +35,11 @@ const ChannelsBox = () => {
       <div className="channelWrap">
         <div className="channelHeader">
           <div className="nameWrap">Channels</div>
-          <IoIosAddCircle size={25} className="addIcon" onClick={handleAddChannel} />
+          <IoIosAddCircle
+            size={25}
+            className="addIcon"
+            onClick={handleClick('add')}
+          />
         </div>
         <div className="itemsWrap">
           {channels.map(({ id, name, removable }) => (
@@ -56,13 +50,17 @@ const ChannelsBox = () => {
               removable={removable}
               activeChannel={activeChannel}
               onClick={handleSetActiveChannel}
-              onClickDelete={handleDeleteChannel}
-              onClickRename={handleRenameChannel}
+              onClickDelete={handleClick}
+              onClickRename={handleClick}
             />
           ))}
         </div>
       </div>
-      <ModalDialog opened={openedModal} setOpened={setOpenedModal} modalType={modalType} />
+      <ModalDialog
+        opened={openedModal}
+        setOpened={setOpenedModal}
+        modalType={modalType}
+      />
     </>
   );
 };

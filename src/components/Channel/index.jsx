@@ -23,7 +23,7 @@ const Channel = ({
 
   return (
     <div className={classNames} onClick={onClick(id)}>
-      <div className="nameWrap" onDoubleClick={onClickRename}>
+      <div className="nameWrap" onDoubleClick={onClickRename('rename')}>
         {name}
       </div>
       {removable && (
@@ -31,7 +31,7 @@ const Channel = ({
           data-id={id}
           size={18}
           className="remove-channel"
-          onClick={onClickDelete}
+          onClick={onClickDelete('remove')}
         />
       )}
     </div>

@@ -16,6 +16,8 @@ const ModalDialog = ({ opened, setOpened, modalType }) => {
   const [id, setId] = useState('');
   const [error, setError] = useState(null);
 
+  console.log('MODALType', modalType);
+
   const { t } = useTranslation();
 
   const activeChannel = useSelector((state) => state.activeChannel);
@@ -46,7 +48,9 @@ const ModalDialog = ({ opened, setOpened, modalType }) => {
 
   const handleSubmitRename = async ({ name }) => {
     try {
-      await dispatch(asyncActions.renameChannel({ name, currentId: activeChannel }));
+      await dispatch(
+        asyncActions.renameChannel({ name, currentId: activeChannel }),
+      );
       setOpened(false);
       form.setFieldValue('name', '');
     } catch (e) {
@@ -66,7 +70,8 @@ const ModalDialog = ({ opened, setOpened, modalType }) => {
     }
   };
 
-  const handleChangeInput = (event) => form.setFieldValue('name', event.currentTarget.value);
+  const handleChangeInput = (event) =>
+    form.setFieldValue('name', event.currentTarget.value);
 
   const handleFocus = () => {
     setError(null);
@@ -97,7 +102,13 @@ const ModalDialog = ({ opened, setOpened, modalType }) => {
       onClose={() => setOpened(false)}
       overlayOpacity={0.5}
     >
-      <form onSubmit={!isRemove ? form.onSubmit(onSubmitForm[modalType]) : onSubmitForm[modalType]}>
+      <form
+        onSubmit={
+          !isRemove
+            ? form.onSubmit(onSubmitForm[modalType])
+            : onSubmitForm[modalType]
+        }
+      >
         {!isRemove ? (
           <TextInput
             styles={{
@@ -109,7 +120,10 @@ const ModalDialog = ({ opened, setOpened, modalType }) => {
             value={form.values.name}
             onChange={handleChangeInput}
             onFocus={handleFocus}
-            error={form.errors.name && (error || 'Channel name most be longer then 3 length')}
+            error={
+              form.errors.name &&
+              (error || 'Channel name most be longer then 3 length')
+            }
           />
         ) : (
           <Checkbox

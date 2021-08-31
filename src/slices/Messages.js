@@ -1,3 +1,6 @@
+/* eslint-disable operator-linebreak */
+/* eslint-disable indent */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable arrow-body-style */
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';

@@ -5,14 +5,15 @@ import { createSelector } from 'reselect';
 import useScrollDown from '../../hooks/useScrollDown';
 import Message from '../Messege';
 
-import normalizeDialog from './helpers';
+import normalizeDialog, { norm } from './helpers';
 
 import './styles.css';
 
 const selectActiveMassages = createSelector(
   (state) => state.messages,
   (state) => state.activeChannel,
-  (messages, activeChannel) => messages.filter(({ channelId }) => channelId === activeChannel),
+  (messages, activeChannel) =>
+    messages.filter(({ channelId }) => channelId === activeChannel),
 );
 
 const Dialog = () => {
@@ -23,7 +24,9 @@ const Dialog = () => {
 
   const normalizedDialog = normalizeDialog(activeMessages, userName);
 
-  useScrollDown(messageEl);
+  const nextNorm = norm(activeMessages, userName);
+
+  console.log('NEXTNOTMMESSAGE', nextNorm);
 
   return (
     <div className="dialog">

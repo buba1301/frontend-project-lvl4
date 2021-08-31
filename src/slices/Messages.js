@@ -8,8 +8,14 @@ const slice = createSlice({
   name: 'masseges',
   initialState: [],
   reducers: {
-    getDataMessages: (state, { payload: { messages } }) => [...state, ...messages],
+    getDataMessages: (state, { payload: { messages } }) => [
+      ...state,
+      ...messages,
+    ],
     addMessagesSuccess: (state, { payload }) => [...state, ...payload],
+    removeMessageSuccess: (state, { payload: { id } }) => {
+      return state.filter((message) => message.id !== id);
+    },
   },
   extraReducers: {
     [channelsActions.removeChannelSuccess]: (state, { payload: { id } }) => {
@@ -26,7 +32,21 @@ const addMessage =
     await axios.post(url, { data });
   };
 
+const removeMessage =
+  ({ id }) =>
+  async (dispatch) => {
+    try {
+      const url = routes.messagePath(id);
+      console.log('Remove message', url);
+
+      await axios.delete(url);
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
+  };
+
 const messages = slice.reducer;
 const messagesActions = slice.actions;
 
-export { messages, messagesActions, addMessage };
+export { messages, messagesActions, addMessage, removeMessage };

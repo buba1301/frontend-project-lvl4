@@ -23,10 +23,16 @@ export default (gon) => {
 
   // TODO: add userName in message header
   // TODO: add func delete message
+  // TODO: split messeges per date
 
   socket.on('newMessage', ({ data }) => {
     const { attributes } = data;
     store.dispatch(actions.addMessagesSuccess([attributes]));
+  });
+  socket.on('removeMessage', ({ data }) => {
+    console.log('SOCKET', data);
+
+    store.dispatch(actions.removeMessageSuccess(data));
   });
   socket.on('newUser', ({ data }) => {
     const { attributes } = data;
@@ -37,7 +43,12 @@ export default (gon) => {
 
     store.dispatch(actions.addChannelSuccess([attributes]));
     store.dispatch(actions.setActiveChannel(id));
-    await store.dispatch(asyncActions.addUser({ activeChannel: data.id, userName: useCookies.get() }));
+    await store.dispatch(
+      asyncActions.addUser({
+        activeChannel: data.id,
+        userName: useCookies.get(),
+      }),
+    );
   });
   socket.on('renameChannel', ({ data }) => {
     store.dispatch(actions.renameChannelSuccess(data));

@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 // @ts-check
 
 const host = '';
@@ -7,5 +8,7 @@ export default {
   channelUsersPath: (id) => [host, prefix, 'channels', id, 'users'].join('/'),
   channelsPath: () => [host, prefix, 'channels'].join('/'),
   channelPath: (id) => [host, prefix, 'channels', id].join('/'),
-  channelMessagesPath: (id) => [host, prefix, 'channels', id, 'messages'].join('/'),
+  channelMessagesPath: (id) =>
+    [host, prefix, 'channels', id, 'messages'].join('/'),
+  messagePath: (id) => [host, prefix, 'messages', id].join('/'),
 };

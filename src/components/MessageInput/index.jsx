@@ -27,7 +27,8 @@ const MessageInput = () => {
 
     const date = new Date();
 
-    const avatar = 'https://sun9-58.userapi.com/c836638/v836638514/867c/SPMigNB8gw0.jpg';
+    const avatar =
+      'https://sun9-58.userapi.com/c836638/v836638514/867c/SPMigNB8gw0.jpg';
 
     const messageData = { activeChannel, userName, message, date, avatar };
 

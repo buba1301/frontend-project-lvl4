@@ -36,7 +36,9 @@ export default (app, io, defaultState = {}) => {
       reply.view('index.pug', { gon: state });
     })
     .get('/api/v1/channels/:channelId/users', (req, reply) => {
-      const users = state.users.filter((m) => m.channelId === req.params.channelId);
+      const users = state.users.filter(
+        (m) => m.channelId === req.params.channelId,
+      );
 
       const resources = users.map((m) => ({
         type: 'users',
@@ -146,7 +148,9 @@ export default (app, io, defaultState = {}) => {
       io.emit('renameChannel', data); // отправить событие на все подключенные сокеты
     })
     .get('/api/v1/channels/:channelId/messages', (req, reply) => {
-      const messages = state.messages.filter((m) => m.channelId === Number(req.params.channelId));
+      const messages = state.messages.filter(
+        (m) => m.channelId === Number(req.params.channelId),
+      );
       const resources = messages.map((m) => ({
         type: 'messages',
         id: m.id,
@@ -178,5 +182,19 @@ export default (app, io, defaultState = {}) => {
       };
       reply.send(data);
       io.emit('newMessage', data); // отправить событие на все подключенные сокеты
+    })
+    .delete('/api/v1/messages/:id', (req, reply) => {
+      const messageId = req.params.id;
+      state.messages = state.messages.filter((m) => m.id !== messageId);
+      reply.code(204);
+      const data = {
+        data: {
+          type: 'messages',
+          id: messageId,
+        },
+      };
+
+      reply.send(data);
+      io.emit('removeMessage', data); // отправить событие на все подключенные сокеты
     });
 };

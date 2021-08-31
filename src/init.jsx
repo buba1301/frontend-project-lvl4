@@ -14,22 +14,16 @@ const socket = io({
 export default (gon) => {
   const defaultId = gon.currentChannelId;
 
-  console.log('INIT', gon);
-
   store.dispatch(actions.getDataChannels(gon));
   store.dispatch(actions.getDataUsers(gon));
   store.dispatch(actions.getDataMessages(gon));
   store.dispatch(actions.setActiveChannel(gon.currentChannelId));
-
-  // TODO: add userName in message header
 
   socket.on('newMessage', ({ data }) => {
     const { attributes } = data;
     store.dispatch(actions.addMessagesSuccess([attributes]));
   });
   socket.on('removeMessage', ({ data }) => {
-    console.log('SOCKET', data);
-
     store.dispatch(actions.removeMessageSuccess(data));
   });
   socket.on('newUser', ({ data }) => {

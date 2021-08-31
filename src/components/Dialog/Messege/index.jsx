@@ -11,15 +11,26 @@ import { asyncActions } from '../../../slices/index';
 import './styles.css';
 
 // eslint-disable-next-line object-curly-newline
-const Message = ({ isReverse, isRemovable, message, avatar, id, date }) => {
+const Message = ({
+  isReverse,
+  isRemovable,
+  message,
+  avatar,
+  id,
+  date,
+  userName,
+}) => {
   const dispatch = useDispatch();
+  console.log('MEssage', userName);
 
   const handleDeleteMessage = async (event) => {
     const currentMessageId = event.currentTarget.getAttribute('data-id');
 
     try {
       await dispatch(asyncActions.removeMessage({ id: currentMessageId }));
-    } catch (e) {}
+    } catch (e) {
+      console.log('Error', e);
+    }
   };
 
   return (
@@ -31,6 +42,9 @@ const Message = ({ isReverse, isRemovable, message, avatar, id, date }) => {
     >
       <img src={avatar} className="avatar" alt="Avatar" />
       <div className="list">
+        <div className="userName">
+          <div>{userName}</div>
+        </div>
         <div className="list-item" key={id}>
           <div className="text">{message}</div>
           <div className="time">{dayjs(date).format('HH:mm')}</div>
@@ -54,6 +68,7 @@ Message.propTypes = {
   message: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  userName: PropTypes.string.isRequired,
 };
 
 export default Message;

@@ -43,6 +43,7 @@ const Dialog = () => {
                 message={item.message}
                 id={item.id}
                 date={item.date}
+                userName={item.userName}
                 isReverse={item.isReverse}
                 isRemovable={item.isRemovable}
               />

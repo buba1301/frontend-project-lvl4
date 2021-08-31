@@ -22,8 +22,6 @@ export default (gon) => {
   store.dispatch(actions.setActiveChannel(gon.currentChannelId));
 
   // TODO: add userName in message header
-  // TODO: add func delete message
-  // TODO: split messeges per date
 
   socket.on('newMessage', ({ data }) => {
     const { attributes } = data;
